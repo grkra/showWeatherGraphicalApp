@@ -29,8 +29,8 @@
                               <Label text="City: " />
                               <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
-                                    <Button mnemonicParsing="false" prefHeight="25.6" prefWidth="25.6" textAlignment="JUSTIFY">
+                                    <TextField fx:id="currentLocalizationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
+                                    <Button mnemonicParsing="false" onAction="#checkCurrentLocalizationButtonAction" prefHeight="25.6" prefWidth="25.6" textAlignment="JUSTIFY">
                                        <graphic>
                                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -44,7 +44,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Button mnemonicParsing="false" text="Check weather">
+                              <Button mnemonicParsing="false" onAction="#checkCurrentWeatherButtonAction" text="Check weather">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
