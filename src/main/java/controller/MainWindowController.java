@@ -1,7 +1,10 @@
 package controller;
 
+import controller.service.GetCurrentLocationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+
+import java.net.http.HttpClient;
 
 /**
  * Controller of the main window of the application.
@@ -17,7 +20,15 @@ public class MainWindowController {
      */
     @FXML
     void checkCurrentLocalizationButtonAction() {
-        System.out.println("Clicked check current localization");
+        GetCurrentLocationService locationService = new GetCurrentLocationService();
+
+        locationService.setOnSucceeded(
+                workerStateEvent -> {
+                    System.out.println(locationService.getValue());
+                }
+        );
+
+        locationService.start();
     }
 
     /**
