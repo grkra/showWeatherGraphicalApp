@@ -1,10 +1,8 @@
 package controller;
 
-import controller.service.GetCurrentLocationService;
+import controller.service.GetLocationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-
-import java.net.http.HttpClient;
 
 /**
  * Controller of the main window of the application.
@@ -13,6 +11,7 @@ public class MainWindowController {
     @FXML
     private TextField currentLocalizationField;
 
+    // ERROR: 1. click on the button statrts service but does NOT trigger onSucceed()
     /**
      * Event listener triggered by clicking on check current localization button.
      * It is used to get current localization of a device and to add this localization
@@ -20,15 +19,23 @@ public class MainWindowController {
      */
     @FXML
     void checkCurrentLocalizationButtonAction() {
-        GetCurrentLocationService locationService = new GetCurrentLocationService();
+        System.out.println("Clicked check location");
+        GetLocationService locationService = new GetLocationService();
 
+        // ERROR: 1. click on the button statrts service but does NOT trigger onSucceed()
         locationService.setOnSucceeded(
                 workerStateEvent -> {
-                    System.out.println(locationService.getValue());
+                    this.currentLocalizationField.setText(locationService.getValue().getName());
                 }
         );
+        locationService.setOnFailed(
+                workerStateEvent ->
+                {
+                    System.out.println(locationService.getException());
+                });
 
-        locationService.start();
+        locationService.restart();
+        System.out.println("Started");
     }
 
     /**
