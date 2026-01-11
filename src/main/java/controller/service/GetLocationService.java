@@ -13,12 +13,23 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-// ERROR: 1. click on the button statrts service but does NOT trigger onSucceed()
 /**
  * Controller responsible for getting current location.
  * It sends request to IP geolocation API to get current location of a device.
  */
 public class GetLocationService extends Service<Location> {
+
+    HttpClient httpClient;
+
+    /**
+     * Constructor of the GetLocationService service.
+     * It initializes http client object for the requests to API.
+     */
+    public GetLocationService() {
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(5))
+                .build();
+    }
 
     @Override
     protected Task<Location> createTask() {
@@ -26,10 +37,6 @@ public class GetLocationService extends Service<Location> {
             @Override
             protected Location call() throws Exception {
 
-                System.out.println("Starting");
-                HttpClient httpClient = HttpClient.newBuilder()
-                        .connectTimeout(Duration.ofSeconds(5))
-                        .build();
                 HttpRequest httpRequest = HttpRequest.newBuilder()
                         .uri(URI.create("http://ip-api.com/json/?fields=status,message,city,lat,lon"))
                         .timeout(Duration.ofSeconds(5))
@@ -37,13 +44,10 @@ public class GetLocationService extends Service<Location> {
                         .build();
 
                 try {
-                    System.out.println("Inside try");
                     HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
                     int httpResponseStatusCode = httpResponse.statusCode();
 
-                    System.out.println("HTTP Response code: " + httpResponseStatusCode);
                     if (httpResponseStatusCode >=200 && httpResponseStatusCode <300) {
-                        System.out.println("HTTP Response body: " + httpResponse.body());
                         ObjectMapper jsonMapper = new ObjectMapper();
                         JsonNode jsonRoot = jsonMapper.readTree(httpResponse.body());
                         String cityName = jsonRoot.get("city").asString();

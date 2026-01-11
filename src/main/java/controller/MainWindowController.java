@@ -2,16 +2,27 @@ package controller;
 
 import controller.service.GetLocationService;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Controller of the main window of the application.
  */
-public class MainWindowController {
+public class MainWindowController implements Initializable {
     @FXML
     private TextField currentLocalizationField;
 
-    // ERROR: 1. click on the button statrts service but does NOT trigger onSucceed()
+    /**
+     * Object of the GetLocationService class.
+     * It's service used to get geolocation of a device on which the application works.
+     * It is used when GetCurrentLocation button is clicked.
+     * It is initialized in initialize() method.
+     */
+    GetLocationService locationService;
+
     /**
      * Event listener triggered by clicking on check current localization button.
      * It is used to get current localization of a device and to add this localization
@@ -19,23 +30,7 @@ public class MainWindowController {
      */
     @FXML
     void checkCurrentLocalizationButtonAction() {
-        System.out.println("Clicked check location");
-        GetLocationService locationService = new GetLocationService();
-
-        // ERROR: 1. click on the button statrts service but does NOT trigger onSucceed()
-        locationService.setOnSucceeded(
-                workerStateEvent -> {
-                    this.currentLocalizationField.setText(locationService.getValue().getName());
-                }
-        );
-        locationService.setOnFailed(
-                workerStateEvent ->
-                {
-                    System.out.println(locationService.getException());
-                });
-
-        locationService.restart();
-        System.out.println("Started");
+        this.locationService.restart();
     }
 
     /**
@@ -44,5 +39,22 @@ public class MainWindowController {
     @FXML
     void checkCurrentWeatherButtonAction() {
         System.out.println("Clicked check weather for current localization");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // LocationService initialization:
+        this.locationService = new GetLocationService();
+        this.locationService.setOnSucceeded(
+                workerStateEvent -> {
+                    this.currentLocalizationField.setText(locationService.getValue().getName());
+                }
+        );
+        this.locationService.setOnFailed(
+                workerStateEvent ->
+                {
+                    System.out.println(locationService.getException());
+                });
+
     }
 }
