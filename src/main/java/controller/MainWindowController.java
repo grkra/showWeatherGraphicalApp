@@ -15,6 +15,8 @@ public class MainWindowController implements Initializable {
     @FXML
     private TextField currentLocalizationField;
 
+
+
     /**
      * Object of the GetLocationService class.
      * It's service used to get geolocation of a device on which the application works.
@@ -24,12 +26,12 @@ public class MainWindowController implements Initializable {
     GetLocationService locationService;
 
     /**
-     * Event listener triggered by clicking on check current localization button.
-     * It is used to get current localization of a device and to add this localization
+     * Event listener triggered by clicking on check current location button.
+     * It is used to get current location of a device and to add this location
      * to input window.
      */
     @FXML
-    void checkCurrentLocalizationButtonAction() {
+    void checkCurrentLocationButtonAction() {
         this.locationService.restart();
     }
 
