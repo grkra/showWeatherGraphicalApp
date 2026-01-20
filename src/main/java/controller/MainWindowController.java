@@ -1,9 +1,12 @@
 package controller;
 
+import controller.service.GetCurrentWeatherService;
 import controller.service.GetLocationService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.Location;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,9 +16,16 @@ import java.util.ResourceBundle;
  */
 public class MainWindowController implements Initializable {
     @FXML
-    private TextField currentLocalizationField;
+    private Label currentLocationErrorLabel;
 
+    @FXML
+    private TextField currentLocationField;
 
+    @FXML
+    private TextField destinationLocationField;
+
+    private Location currentLocation;
+    private Location targetLocation;
 
     /**
      * Object of the GetLocationService class.
@@ -24,6 +34,14 @@ public class MainWindowController implements Initializable {
      * It is initialized in initialize() method.
      */
     GetLocationService locationService;
+
+    /**
+     * Object of the GetCurrentWeatherService class.
+     * It's service used to get current weather for specified location.
+     * It is used when GetWeather button is clicked.
+     * It is initialized in initialize() method.
+     */
+    GetCurrentWeatherService currentWeatherService;
 
     /**
      * Event listener triggered by clicking on check current location button.
@@ -40,7 +58,12 @@ public class MainWindowController implements Initializable {
      */
     @FXML
     void checkCurrentWeatherButtonAction() {
-        System.out.println("Clicked check weather for current localization");
+        this.currentWeatherService.restart();
+    }
+
+    @FXML
+    void checkDestinationWeatherButtonAction() {
+        System.out.println("clicked destination check weather");
     }
 
     @Override
@@ -49,14 +72,23 @@ public class MainWindowController implements Initializable {
         this.locationService = new GetLocationService();
         this.locationService.setOnSucceeded(
                 workerStateEvent -> {
-                    this.currentLocalizationField.setText(locationService.getValue().getName());
+                    this.currentLocation = this.locationService.getValue();
+                    this.currentWeatherService.setLocation(this.currentLocation);
+                    this.currentLocationField.setText(this.currentLocation.getName());
+                    this.currentLocationErrorLabel.setText("");
                 }
         );
         this.locationService.setOnFailed(
                 workerStateEvent ->
                 {
-                    System.out.println(locationService.getException());
+                    this.currentLocationErrorLabel.setText("Couldn't check current location. Please try later or type it.");
                 });
 
+
+        // GetCurrentWeatherService initialization:
+        this.currentWeatherService = new GetCurrentWeatherService();
+        this.currentWeatherService.setOnSucceeded(workerStateEvent -> {
+            System.out.println(this.currentWeatherService.getValue());
+        });
     }
 }

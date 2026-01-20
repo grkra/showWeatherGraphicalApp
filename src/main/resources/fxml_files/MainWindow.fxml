@@ -17,7 +17,7 @@
          <children>
             <HBox prefHeight="498.0" prefWidth="800.0" spacing="20.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Your localization">
                            <VBox.margin>
@@ -29,7 +29,7 @@
                               <Label text="City: " />
                               <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="currentLocalizationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
+                                    <TextField fx:id="currentLocationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
                                     <Button mnemonicParsing="false" onAction="#checkCurrentLocationButtonAction" prefHeight="25.6" prefWidth="25.6" textAlignment="JUSTIFY">
                                        <graphic>
                                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -73,20 +73,50 @@
                               <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Ciśnienie: 1015 hPa" />
                            </children>
                         </VBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Your  destination">
+                        <Label fx:id="currentLocationErrorLabel" alignment="BASELINE_CENTER" maxWidth="1.7976931348623157E308" textFill="#fa0000" wrapText="true">
                            <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </padding>
                         </Label>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Your  destination" />
+                        <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                            <children>
                               <Label text="City: " />
+                              <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="destinationLocationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#checkDestinationWeatherButtonAction" text="Check weather">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
                         </HBox>
+                        <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/02d.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Lekkie zachmurzenie" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Temperatura: 25 °C" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Prawdopodobieństwo opadów: 5 %" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Prędkość wiatru: 3,98 km/h" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Zachmurzenie: 25 %" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Wilgotność: 65 %" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Ciśnienie: 1015 hPa" />
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>
