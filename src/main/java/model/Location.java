@@ -4,12 +4,19 @@ package model;
  * City - name of the city, longitude, latitude
  */
 public class Location {
-    private String name;
-    private String longitude;
-    private String latitude;
+    private String name = "";
+    private String longitude ="";
+    private String latitude = "";
 
     /**
-     * Constructor of the class Location.
+     * Constructor of the class Location with no parameters.
+     * Name, latitude and longitude need to be set with setters.
+     */
+    public Location() {}
+
+    /**
+     * Constructor of the class Location with name of a city, itt latitude and longitude.
+     * Constructor initializes all properties.
      * @param name (String) name of a city in English
      * @param longitude (String) geographical longitude of a city
      * @param latitude (String) geographical latitude of a city
@@ -42,5 +49,20 @@ public class Location {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public void setLocation (String name, String longitude, String latitude) {
+        this.name = name;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", latitude='" + latitude + '\'' +
+                '}';
     }
 }

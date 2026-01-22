@@ -58,6 +58,13 @@ public class MainWindowController implements Initializable {
      */
     @FXML
     void checkCurrentWeatherButtonAction() {
+        if (this.currentLocation.getName().isBlank()
+                ||
+                !this.currentLocationField.getText().toLowerCase().equals(this.currentLocation.getName().toLowerCase())) {
+            this.currentLocation.setLocation(this.currentLocationField.getText(), "", "");
+        }
+
+        this.currentWeatherService.setLocation(this.currentLocation);
         this.currentWeatherService.restart();
     }
 
@@ -68,6 +75,9 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Location objects
+        this.currentLocation = new Location();
+
         // LocationService initialization:
         this.locationService = new GetLocationService();
         this.locationService.setOnSucceeded(
@@ -87,8 +97,9 @@ public class MainWindowController implements Initializable {
 
         // GetCurrentWeatherService initialization:
         this.currentWeatherService = new GetCurrentWeatherService();
-        this.currentWeatherService.setOnSucceeded(workerStateEvent -> {
-            System.out.println(this.currentWeatherService.getValue());
-        });
+        this.currentWeatherService.setOnSucceeded(
+                workerStateEvent -> {
+                    System.out.println(this.currentWeatherService.getValue());
+                });
     }
 }
