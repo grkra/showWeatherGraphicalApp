@@ -59,18 +59,14 @@
                         </HBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                            <children>
-                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/02d.png" />
-                                 </image>
-                              </ImageView>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Lekkie zachmurzenie" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Temperatura: 25 °C" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Prawdopodobieństwo opadów: 5 %" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Prędkość wiatru: 3,98 km/h" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Zachmurzenie: 25 %" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Wilgotność: 65 %" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Ciśnienie: 1015 hPa" />
+                              <ImageView fx:id="currentLocationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="currentLocationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
                         <Label fx:id="currentLocationErrorLabel" alignment="BASELINE_CENTER" maxWidth="1.7976931348623157E308" textFill="#fa0000" wrapText="true">

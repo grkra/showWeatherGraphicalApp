@@ -73,6 +73,7 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
 
                         String iconCode = jsonRoot.get("weather").get(0).get("icon").asString();
                         String description = jsonRoot.get("weather").get(0).get("description").asString();
+                        description = description.substring(0,1).toUpperCase() + description.substring(1);
                         String temperature = jsonRoot.get("main").get("temp").asString() + " °C";
                         String feelsLikeTemperature = jsonRoot.get("main").get("feels_like").asString() + " °C";
                         String windSpeed = jsonRoot.get("wind").get("speed").asString() + " m/s";

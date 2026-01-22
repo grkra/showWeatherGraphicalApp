@@ -23,4 +23,36 @@ public class Weather {
         this.humidity = humidity;
         this.pressure = pressure;
     }
+
+    public String getIconCode() {
+        return iconCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public String getFeelsLikeTemperature() {
+        return feelsLikeTemperature;
+    }
+
+    public String getWindSpeed() {
+        return windSpeed;
+    }
+
+    public String getCloudiness() {
+        return cloudiness;
+    }
+
+    public String getHumidity() {
+        return humidity;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
 }

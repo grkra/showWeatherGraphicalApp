@@ -6,7 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.Location;
+import model.Weather;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,16 +19,41 @@ import java.util.ResourceBundle;
  */
 public class MainWindowController implements Initializable {
     @FXML
+    private Label currentLocationCloudinessLabel;
+
+    @FXML
+    private Label currentLocationDescriptionLable;
+
+    @FXML
     private Label currentLocationErrorLabel;
 
     @FXML
+    private Label currentLocationFeelsLikeTemperatureLabel;
+
+    @FXML
     private TextField currentLocationField;
+
+    @FXML
+    private Label currentLocationHumidityLabel;
+
+    @FXML
+    private ImageView currentLocationIcon;
+
+    @FXML
+    private Label currentLocationPressureLabel;
+
+    @FXML
+    private Label currentLocationTemperatureLabel;
+
+    @FXML
+    private Label currentLocationWindSpeedLabel;
 
     @FXML
     private TextField destinationLocationField;
 
     private Location currentLocation;
     private Location targetLocation;
+    private Weather currentWeatherCurrentLocation;
 
     /**
      * Object of the GetLocationService class.
@@ -99,7 +127,24 @@ public class MainWindowController implements Initializable {
         this.currentWeatherService = new GetCurrentWeatherService();
         this.currentWeatherService.setOnSucceeded(
                 workerStateEvent -> {
-                    System.out.println(this.currentWeatherService.getValue());
+                    this.currentWeatherCurrentLocation = this.currentWeatherService.getValue().getWeather();
+                    this.currentLocation = this.currentWeatherService.getValue().getLocation();
+
+                    this.currentLocationIcon.setImage(new Image("/icons/"+this.currentWeatherCurrentLocation.getIconCode() + ".png"));
+                    this.currentLocationDescriptionLable.setText(this.currentWeatherCurrentLocation.getDescription());
+                    this.currentLocationTemperatureLabel.setText("Temperature: " + this.currentWeatherCurrentLocation.getTemperature());
+                    this.currentLocationFeelsLikeTemperatureLabel.setText("Feels like: " + this.currentWeatherCurrentLocation.getFeelsLikeTemperature());
+                    this.currentLocationWindSpeedLabel.setText("Wind speed: " + this.currentWeatherCurrentLocation.getWindSpeed());
+                    this.currentLocationCloudinessLabel.setText("Cloudiness: " + this.currentWeatherCurrentLocation.getCloudiness());
+                    this.currentLocationHumidityLabel.setText("Humidity: " + this.currentWeatherCurrentLocation.getHumidity());
+                    this.currentLocationPressureLabel.setText("Pressure: " + this.currentWeatherCurrentLocation.getPressure());
+
+                    this.currentLocationErrorLabel.setText("");
+                });
+        this.currentWeatherService.setOnFailed(
+                workerStateEvent ->
+                {
+                    this.currentLocationErrorLabel.setText("Couldn't check weather. Please try later.");
                 });
     }
 }
