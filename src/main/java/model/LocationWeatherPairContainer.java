@@ -6,11 +6,11 @@ package model;
  */
 public class LocationWeatherPairContainer {
     private Location location;
-    private Weather weather;
+    private CurrentWeather currentWeather;
 
-    public LocationWeatherPairContainer(Location location, Weather weather) {
+    public LocationWeatherPairContainer(Location location, CurrentWeather currentWeather) {
         this.location = location;
-        this.weather = weather;
+        this.currentWeather = currentWeather;
     }
 
     public Location getLocation() {
@@ -21,11 +21,11 @@ public class LocationWeatherPairContainer {
         this.location = location;
     }
 
-    public Weather getWeather() {
-        return weather;
+    public CurrentWeather getWeather() {
+        return currentWeather;
     }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
+    public void setWeather(CurrentWeather currentWeather) {
+        this.currentWeather = currentWeather;
     }
 }

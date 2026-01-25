@@ -1,9 +1,10 @@
 package model;
 
 /**
- * Weather contains: - name of the city, longitude, latitude
+ * Weather data to be displayed in current weather section.
+ * Contains: code to display icon, description, temperature, feels like temperature, wind speed, cloudiness, humidity, pressure.
  */
-public class Weather {
+public class CurrentWeather {
     private String iconCode;
     private String description;
     private String temperature;
@@ -13,7 +14,7 @@ public class Weather {
     private String humidity;
     private String pressure;
 
-    public Weather(String iconCode, String description, String temperature, String feelsLikeTemperature, String windSpeed, String cloudiness, String humidity, String pressure) {
+    public CurrentWeather(String iconCode, String description, String temperature, String feelsLikeTemperature, String windSpeed, String cloudiness, String humidity, String pressure) {
         this.iconCode = iconCode;
         this.description = description;
         this.temperature = temperature;

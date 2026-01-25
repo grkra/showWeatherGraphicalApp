@@ -2,9 +2,9 @@ package controller.service;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import model.CurrentWeather;
 import model.Location;
 import model.LocationWeatherPairContainer;
-import model.Weather;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
@@ -21,7 +21,14 @@ import java.time.Duration;
  */
 public class GetCurrentWeatherService extends Service<LocationWeatherPairContainer> {
 
+    /**
+     * Name of a city for which weather is being checked.
+     */
     private Location location;
+
+    /**
+     * Connection object used to send HTTP request and get responses from API.
+     */
     private HttpClient httpClient;
 
     /**
@@ -60,7 +67,6 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
                     int httpResponseStatusCode = httpResponse.statusCode();
 
                     if (httpResponseStatusCode >= 200 && httpResponseStatusCode < 300) {
-                        System.out.println(httpResponse.body());
 
                         ObjectMapper jsonMapper = new ObjectMapper();
                         JsonNode jsonRoot = jsonMapper.readTree(httpResponse.body());
@@ -81,9 +87,9 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
                         String humidity = jsonRoot.get("main").get("humidity").asString() + " %";
                         String pressure = jsonRoot.get("main").get("pressure").asString() + " hPa";
 
-                        Weather weather = new Weather(iconCode, description, temperature, feelsLikeTemperature, windSpeed, cloudiness, humidity, pressure);
+                        CurrentWeather currentWeather = new CurrentWeather(iconCode, description, temperature, feelsLikeTemperature, windSpeed, cloudiness, humidity, pressure);
 
-                        return new LocationWeatherPairContainer(location, weather);
+                        return new LocationWeatherPairContainer(location, currentWeather);
                     } else {
                         throw new IOException("HTTP Error: " + httpResponseStatusCode);
                     }
@@ -94,6 +100,11 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
         };
     }
 
+    /**
+     * Method sets Location object. Location is necessary to send API request.
+     * First set location, then start service.
+     * @param location - (String) name of a city to check weather.
+     */
     public void setLocation(Location location) {
         this.location = location;
     }

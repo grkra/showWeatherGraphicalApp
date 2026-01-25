@@ -2,6 +2,7 @@ package controller;
 
 import controller.service.GetCurrentWeatherService;
 import controller.service.GetLocationService;
+import controller.service.GetWeatherForecastService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -9,7 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Location;
-import model.Weather;
+import model.CurrentWeather;
+import model.WeatherForecast;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,7 +55,8 @@ public class MainWindowController implements Initializable {
 
     private Location currentLocation;
     private Location targetLocation;
-    private Weather currentWeatherCurrentLocation;
+    private CurrentWeather currentCurrentWeatherCurrentLocation;
+    private WeatherForecast weatherForecast;
 
     /**
      * Object of the GetLocationService class.
@@ -72,6 +75,14 @@ public class MainWindowController implements Initializable {
     GetCurrentWeatherService currentWeatherService;
 
     /**
+     * Object of the GetWeatherForecastService class.
+     * It's service used to get 7-days weather forecast for specified location.
+     * It is used when GetWeather button is clicked.
+     * It is initialized in initialize() method.
+     */
+    GetWeatherForecastService weatherForecastService;
+
+    /**
      * Event listener triggered by clicking on check current location button.
      * It is used to get current location of a device and to add this location
      * to input window.
@@ -86,6 +97,10 @@ public class MainWindowController implements Initializable {
      */
     @FXML
     void checkCurrentWeatherButtonAction() {
+        // Longitude and latitude are saved to currentLocation if a user clicked getLocation button (from GetLocationService)
+        // or already clicked getWeather button (from GetCurrentWeatherService).
+        // But if a user changed city after that, longitude and latitude need to be cleared,
+        // so getWeatherServices should send request with city name instead of geographical coordinates.
         if (this.currentLocation.getName().isBlank()
                 ||
                 !this.currentLocationField.getText().toLowerCase().equals(this.currentLocation.getName().toLowerCase())) {
@@ -94,6 +109,8 @@ public class MainWindowController implements Initializable {
 
         this.currentWeatherService.setLocation(this.currentLocation);
         this.currentWeatherService.restart();
+        this.weatherForecastService.setLocation(this.currentLocation);
+        this.weatherForecastService.restart();
     }
 
     @FXML
@@ -122,22 +139,21 @@ public class MainWindowController implements Initializable {
                     this.currentLocationErrorLabel.setText("Couldn't check current location. Please try later or type it.");
                 });
 
-
         // GetCurrentWeatherService initialization:
         this.currentWeatherService = new GetCurrentWeatherService();
         this.currentWeatherService.setOnSucceeded(
                 workerStateEvent -> {
-                    this.currentWeatherCurrentLocation = this.currentWeatherService.getValue().getWeather();
+                    this.currentCurrentWeatherCurrentLocation = this.currentWeatherService.getValue().getWeather();
                     this.currentLocation = this.currentWeatherService.getValue().getLocation();
 
-                    this.currentLocationIcon.setImage(new Image("/icons/"+this.currentWeatherCurrentLocation.getIconCode() + ".png"));
-                    this.currentLocationDescriptionLable.setText(this.currentWeatherCurrentLocation.getDescription());
-                    this.currentLocationTemperatureLabel.setText("Temperature: " + this.currentWeatherCurrentLocation.getTemperature());
-                    this.currentLocationFeelsLikeTemperatureLabel.setText("Feels like: " + this.currentWeatherCurrentLocation.getFeelsLikeTemperature());
-                    this.currentLocationWindSpeedLabel.setText("Wind speed: " + this.currentWeatherCurrentLocation.getWindSpeed());
-                    this.currentLocationCloudinessLabel.setText("Cloudiness: " + this.currentWeatherCurrentLocation.getCloudiness());
-                    this.currentLocationHumidityLabel.setText("Humidity: " + this.currentWeatherCurrentLocation.getHumidity());
-                    this.currentLocationPressureLabel.setText("Pressure: " + this.currentWeatherCurrentLocation.getPressure());
+                    this.currentLocationIcon.setImage(new Image("/icons/" + this.currentCurrentWeatherCurrentLocation.getIconCode() + ".png"));
+                    this.currentLocationDescriptionLable.setText(this.currentCurrentWeatherCurrentLocation.getDescription());
+                    this.currentLocationTemperatureLabel.setText("Temperature: " + this.currentCurrentWeatherCurrentLocation.getTemperature());
+                    this.currentLocationFeelsLikeTemperatureLabel.setText("Feels like: " + this.currentCurrentWeatherCurrentLocation.getFeelsLikeTemperature());
+                    this.currentLocationWindSpeedLabel.setText("Wind speed: " + this.currentCurrentWeatherCurrentLocation.getWindSpeed());
+                    this.currentLocationCloudinessLabel.setText("Cloudiness: " + this.currentCurrentWeatherCurrentLocation.getCloudiness());
+                    this.currentLocationHumidityLabel.setText("Humidity: " + this.currentCurrentWeatherCurrentLocation.getHumidity());
+                    this.currentLocationPressureLabel.setText("Pressure: " + this.currentCurrentWeatherCurrentLocation.getPressure());
 
                     this.currentLocationErrorLabel.setText("");
                 });
@@ -146,5 +162,13 @@ public class MainWindowController implements Initializable {
                 {
                     this.currentLocationErrorLabel.setText("Couldn't check weather. Please try later.");
                 });
+
+        // GetWeatherForecastService initialization:
+        this.weatherForecastService = new GetWeatherForecastService();
+        this.weatherForecastService.setOnSucceeded(workerStateEvent ->
+        {
+            this.weatherForecast = this.weatherForecastService.getValue();
+            System.out.println(this.weatherForecast);
+        });
     }
 }
