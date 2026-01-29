@@ -52,7 +52,7 @@ public class Location {
     }
 
     public void setLocation (String name, String longitude, String latitude) {
-        this.name = name;
+        this.name = name.substring(0, 1).toUpperCase() + name.substring(1);
         this.longitude = longitude;
         this.latitude = latitude;
     }

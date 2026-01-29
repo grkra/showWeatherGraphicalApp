@@ -78,7 +78,7 @@ public class GetWeatherForecastService extends Service<WeatherForecast> {
                                     zonedDateTime.getHour() >= 11 && zonedDateTime.getHour() <= 13) {
 
                                 String iconCode = oneDayOnList.get("weather").get(0).get("icon").asString();
-                                String temperature = oneDayOnList.get("main").get("temp").asString();
+                                String temperature = oneDayOnList.get("main").get("temp").asString() + " °C";
                                 SingleDayWeatherForecast singleDayWeatherForecast = new SingleDayWeatherForecast(localDate,iconCode,temperature);
                                 weatherForecast.addWeatherForecastEntry(singleDayWeatherForecast);
                             }

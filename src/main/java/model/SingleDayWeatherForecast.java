@@ -9,12 +9,24 @@ import java.time.LocalDate;
 public class SingleDayWeatherForecast {
     private LocalDate localDate;
     private String iconCode;
-    private String temperature;
+    private String feelsLikeTemperature;
 
-    public SingleDayWeatherForecast(LocalDate localDate, String iconCode, String temperature) {
+    public SingleDayWeatherForecast(LocalDate localDate, String iconCode, String feelsLikeTemperature) {
         this.localDate = localDate;
         this.iconCode = iconCode;
-        this.temperature = temperature;
+        this.feelsLikeTemperature = feelsLikeTemperature;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public String getIconCode() {
+        return iconCode;
+    }
+
+    public String getFeelsLikeTemperature() {
+        return feelsLikeTemperature;
     }
 
     @Override
@@ -22,7 +34,7 @@ public class SingleDayWeatherForecast {
         return "SingleDayWeatherForecast{" +
                 "localDate=" + localDate +
                 ", iconCode='" + iconCode + '\'' +
-                ", temperature='" + temperature + '\'' +
+                ", temperature='" + feelsLikeTemperature + '\'' +
                 '}';
     }
 }

@@ -74,7 +74,6 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
                         // Creating new Location object with longitude and latitude from OpeneWeatherAPI response if they were empty in original one:
                         if (location.getLongitude().isBlank() || location.getLatitude().isBlank()) {
                             location = new Location(location.getName(), jsonRoot.get("coord").get("lon").asString(), jsonRoot.get("coord").get("lat").asString());
-                            System.out.println(location);
                         }
 
                         String iconCode = jsonRoot.get("weather").get(0).get("icon").asString();

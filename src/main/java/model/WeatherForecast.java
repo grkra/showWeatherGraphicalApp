@@ -21,6 +21,14 @@ public class WeatherForecast {
         this.weatherForecastEntries.add(singleDayWeatherForecast);
     }
 
+    public String getCityname() {
+        return cityname;
+    }
+
+    public List<SingleDayWeatherForecast> getWeatherForecastEntries() {
+        return weatherForecastEntries;
+    }
+
     @Override
     public String toString() {
         return "WeatherForecast{" +
