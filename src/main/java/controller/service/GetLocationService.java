@@ -54,7 +54,7 @@ public class GetLocationService extends Service<Location> {
                         String cityLongitude = jsonRoot.get("lon").asString();
                         String cityLatitude = jsonRoot.get("lat").asString();
 
-                        return new Location(cityName, cityLongitude, cityLatitude);
+                        return new Location(cityName, cityLongitude, cityLatitude, true);
                     } else {
                         throw new IOException("HTTP Error: " + httpResponseStatusCode);
                     }

@@ -10,10 +10,12 @@ import java.util.List;
 public class WeatherForecast {
 
     private String cityname;
+    private boolean isCurrentLocation;
     private List<SingleDayWeatherForecast> weatherForecastEntries;
 
-    public WeatherForecast(String cityname) {
+    public WeatherForecast(String cityname, boolean isCurrentLocation) {
         this.cityname = cityname;
+        this.isCurrentLocation = isCurrentLocation;
         this.weatherForecastEntries = new ArrayList<>();
     }
 
@@ -23,6 +25,10 @@ public class WeatherForecast {
 
     public String getCityname() {
         return cityname;
+    }
+
+    public boolean getIsCurrentLocation() {
+        return isCurrentLocation;
     }
 
     public List<SingleDayWeatherForecast> getWeatherForecastEntries() {

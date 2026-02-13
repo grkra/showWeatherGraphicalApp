@@ -63,7 +63,7 @@ public class GetWeatherForecastService extends Service<WeatherForecast> {
                     int httpResponseStatusCode = httpResponse.statusCode();
 
                     if (httpResponseStatusCode >= 200 && httpResponseStatusCode < 300) {
-                        WeatherForecast weatherForecast = new WeatherForecast(location.getName());
+                        WeatherForecast weatherForecast = new WeatherForecast(location.getName(), location.getIsCurrentLocation());
 
                         ObjectMapper jsonMapper = new ObjectMapper();
                         JsonNode jsonRoot = jsonMapper.readTree(httpResponse.body());

@@ -16,10 +16,11 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 /**
- * Controller responsible for getting current weather for location.
+ * Controller responsible for getting current weather for the passed location.
  * It sends request to OpenWeatherApi to get current weather.
+ * In addition to this it gets name and geographic coordinates (longitude and latitude) from OpenWeatherApi
  */
-public class GetCurrentWeatherService extends Service<LocationWeatherPairContainer> {
+public class GetWeatherAndLocationService extends Service<LocationWeatherPairContainer> {
 
     /**
      * Name of a city for which weather is being checked.
@@ -35,7 +36,7 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
      * Constructor of the GetSurrentWeather service.
      * It initializes http client object for the requests to API.
      */
-    public GetCurrentWeatherService() {
+    public GetWeatherAndLocationService() {
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(5))
                 .build();
@@ -73,7 +74,7 @@ public class GetCurrentWeatherService extends Service<LocationWeatherPairContain
 
                         // Creating new Location object with longitude and latitude from OpeneWeatherAPI response if they were empty in original one:
                         if (location.getLongitude().isBlank() || location.getLatitude().isBlank()) {
-                            location = new Location(location.getName(), jsonRoot.get("coord").get("lon").asString(), jsonRoot.get("coord").get("lat").asString());
+                            location = new Location(location.getName(), jsonRoot.get("coord").get("lon").asString(), jsonRoot.get("coord").get("lat").asString(), location.getIsCurrentLocation());
                         }
 
                         String iconCode = jsonRoot.get("weather").get(0).get("icon").asString();
