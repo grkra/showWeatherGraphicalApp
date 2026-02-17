@@ -8,7 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
@@ -17,19 +20,19 @@
          <children>
             <HBox prefHeight="498.0" prefWidth="800.0" spacing="20.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Your localization">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Current location">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </Label>
                         <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" VBox.vgrow="NEVER">
                            <children>
-                              <Label text="City: " />
+                              <Label maxWidth="1.7976931348623157E308" text="City: " />
                               <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="currentLocalizationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
+                                    <TextField fx:id="currentLocationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
                                     <Button mnemonicParsing="false" onAction="#checkCurrentLocationButtonAction" prefHeight="25.6" prefWidth="25.6" textAlignment="JUSTIFY">
                                        <graphic>
                                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -44,7 +47,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Button mnemonicParsing="false" onAction="#checkCurrentWeatherButtonAction" text="Check weather">
+                              <Button mnemonicParsing="false" onAction="#checkCurrentLocationWeatherButtonAction" text="Check weather">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -59,206 +62,142 @@
                         </HBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                            <children>
-                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/02d.png" />
-                                 </image>
-                              </ImageView>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Lekkie zachmurzenie" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Temperatura: 25 °C" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Prawdopodobieństwo opadów: 5 %" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Prędkość wiatru: 3,98 km/h" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Zachmurzenie: 25 %" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Wilgotność: 65 %" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Ciśnienie: 1015 hPa" />
+                              <ImageView fx:id="currentLocationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="currentLocationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="currentLocationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Your  destination">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </Label>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Destination" />
+                        <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                            <children>
                               <Label text="City: " />
+                              <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="destinationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#checkDestinationWeatherButtonAction" text="Check weather">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
                         </HBox>
+                        <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <ImageView fx:id="destinationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="destinationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>
             </HBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Pogoda 7-dniowa" />
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <Label fx:id="weatherForecastLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                  <GridPane fx:id="weatherForecastGrid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <HBox alignment="BASELINE_RIGHT" fillHeight="false" maxWidth="1.7976931348623157E308" spacing="20.0">
+                        <Label fx:id="weatherForecastLabel10" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel20" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel30" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel40" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel50" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel01" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <Label fx:id="weatherForecastLabel02" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
+                        <VBox fx:id="weatherForecastVbox11" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="01.01" HBox.hgrow="ALWAYS" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="02.01" HBox.hgrow="ALWAYS" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="03.01" HBox.hgrow="ALWAYS" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="04.01" HBox.hgrow="ALWAYS" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="05.01" HBox.hgrow="ALWAYS" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="06.01" HBox.hgrow="ALWAYS" />
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="07.01" HBox.hgrow="ALWAYS" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
-                        </HBox>
-                        <HBox alignment="BASELINE_RIGHT" maxWidth="1.7976931348623157E308" spacing="20.0">
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox21" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <children>
-                              <Label text="Warsaw" HBox.hgrow="ALWAYS" />
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
-                        </HBox>
-                        <HBox alignment="BASELINE_RIGHT" maxWidth="1.7976931348623157E308" spacing="20.0">
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox31" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <children>
-                              <Label text="Berlin" HBox.hgrow="ALWAYS" />
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/02d.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="5" />
-                                 </children>
-                              </VBox>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
-                        </HBox>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox12" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox22" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox41" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox32" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox42" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox51" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="weatherForecastVbox52" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </GridPane>
                </children>
             </VBox>
          </children>
@@ -267,4 +206,7 @@
          </padding>
       </VBox>
    </center>
+   <bottom>
+      <Label fx:id="errorLabel" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
