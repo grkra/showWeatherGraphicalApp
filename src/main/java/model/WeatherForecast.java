@@ -13,6 +13,10 @@ public class WeatherForecast {
     private boolean isCurrentLocation;
     private List<SingleDayWeatherForecast> weatherForecastEntries;
 
+    public WeatherForecast(List<SingleDayWeatherForecast> weatherForecastEntries) {
+        this.weatherForecastEntries = weatherForecastEntries;
+    }
+
     public WeatherForecast(String cityname, boolean isCurrentLocation) {
         this.cityname = cityname;
         this.isCurrentLocation = isCurrentLocation;
