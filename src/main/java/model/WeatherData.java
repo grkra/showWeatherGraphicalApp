@@ -11,6 +11,17 @@ public class WeatherData {
 
     /**
      * Constructor of the class WeatherData.
+     * It initializes location object in the class. Rest of objects is not initialized - they are null.
+     * It is used to initialize location and set if it is currentLocation or destination.
+     * @param location (Location) - location for which weather will be checked.
+     *                 You can pass new Location object with just isCurrentLocation argument.
+     */
+    public WeatherData(Location location) {
+        this.location = location;
+    }
+
+    /**
+     * Constructor of the class WeatherData.
      * @param location - object of class Location
      * @param currentWeather - object of class CurrentWeather
      * @param weatherForecast - object of class WeatherForecast

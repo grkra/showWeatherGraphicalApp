@@ -139,15 +139,13 @@ public class MainWindowController implements Initializable {
     private VBox weatherForecastVbox52;
 
     private Node[][] weatherForecastGridElements;
-    private Location currentLocation;
-    private Location destinationLocation;
     private WeatherData currentLocationWeather;
     private WeatherData destinationWeather;
     private LocalDate[] weatherForecastDates;
 
     public MainWindowController() {
-        this.currentLocation = new Location(true);
-        this.destinationLocation = new Location(false);
+        this.currentLocationWeather = new WeatherData(new Location(true));
+        this.destinationWeather = new WeatherData(new Location(false));
         this.weatherForecastDates = new LocalDate[5];
         for (int i = 0; i < 5; i++) {
             this.weatherForecastDates[i] = LocalDate.now().plusDays(1 + i);
@@ -186,9 +184,9 @@ public class MainWindowController implements Initializable {
     @FXML
     void checkCurrentLocationWeatherButtonAction() {
         if (this.checkIfFieldNotBlank(this.currentLocationField.getText())) {
-            setLocation(this.currentLocationField.getText(), this.currentLocation);
+            setLocation(this.currentLocationField.getText(), this.currentLocationWeather.getLocation());
 
-            this.weatherService.setLocation(this.currentLocation);
+            this.weatherService.setLocation(this.currentLocationWeather.getLocation());
             this.weatherService.restart();
         }
     }
@@ -198,8 +196,8 @@ public class MainWindowController implements Initializable {
 
         if (this.checkIfFieldNotBlank(this.destinationField.getText())) {
 
-            setLocation(this.destinationField.getText(), this.destinationLocation);
-            this.weatherService.setLocation(this.destinationLocation);
+            setLocation(this.destinationField.getText(), this.destinationWeather.getLocation());
+            this.weatherService.setLocation(this.destinationWeather.getLocation());
             this.weatherService.restart();
         }
     }
@@ -217,10 +215,8 @@ public class MainWindowController implements Initializable {
         this.locationService = new GetLocationService();
         this.locationService.setOnSucceeded(
                 workerStateEvent -> {
-                    this.currentLocation = this.locationService.getValue();
-//                    this.currentLocationWeather.setLocation(this.locationService.getValue());
-//                    this.currentWeatherService.setLocation(this.currentLocation);
-                    this.currentLocationField.setText(this.currentLocation.getName());
+                    this.currentLocationWeather.setLocation(this.locationService.getValue());
+                    this.currentLocationField.setText(this.currentLocationWeather.getLocation().getName());
                     this.errorLabel.setText("");
                 }
         );
@@ -238,7 +234,7 @@ public class MainWindowController implements Initializable {
 
                     if (weatherData.getLocation().getIsCurrentLocation()) {
                         this.currentLocationWeather=weatherData;
-                        this.currentLocation = this.currentLocationWeather.getLocation();
+//                        this.currentLocation = this.currentLocationWeather.getLocation();
 
                         this.currentLocationIcon.setImage(new Image("/icons/" + this.currentLocationWeather.getCurrentWeather().getIconCode() + ".png"));
                         this.currentLocationDescriptionLable.setText(this.currentLocationWeather.getCurrentWeather().getDescription());
@@ -252,7 +248,6 @@ public class MainWindowController implements Initializable {
                         this.errorLabel.setText("");
                     } else {
                         this.destinationWeather=weatherData;
-                        this.destinationLocation = this.destinationWeather.getLocation();
 
                         this.destinationIcon.setImage(new Image("/icons/" + this.destinationWeather.getCurrentWeather().getIconCode() + ".png"));
                         this.destinationDescriptionLable.setText(this.destinationWeather.getCurrentWeather().getDescription());

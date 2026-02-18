@@ -1,7 +1,7 @@
 package model;
 
 /**
- * City - name of the city, longitude, latitude
+ * City - name of a city, longitude, latitude and information if it is currentLocation
  */
 public class Location {
     private String name = "";
