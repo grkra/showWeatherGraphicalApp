@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,42 +8,23 @@ import java.util.List;
  */
 public class WeatherForecast {
 
-    private String cityname;
-    private boolean isCurrentLocation;
-    private List<SingleDayWeatherForecast> weatherForecastEntries;
+    private List<WeatherForecastSingleDayEntry> weatherForecastEntries;
 
-    public WeatherForecast(List<SingleDayWeatherForecast> weatherForecastEntries) {
+    /**
+     * Constructor of the class WeatherForecast.
+     * @param weatherForecastEntries (List<WeatherForecastSingleDayEntry>) list of weather forecasts for each day.
+     *                               Each day is separate element of the list.
+     */
+    public WeatherForecast(List<WeatherForecastSingleDayEntry> weatherForecastEntries) {
         this.weatherForecastEntries = weatherForecastEntries;
     }
 
-    public WeatherForecast(String cityname, boolean isCurrentLocation) {
-        this.cityname = cityname;
-        this.isCurrentLocation = isCurrentLocation;
-        this.weatherForecastEntries = new ArrayList<>();
-    }
-
-    public void addWeatherForecastEntry (SingleDayWeatherForecast singleDayWeatherForecast) {
-        this.weatherForecastEntries.add(singleDayWeatherForecast);
-    }
-
-    public String getCityname() {
-        return cityname;
-    }
-
-    public boolean getIsCurrentLocation() {
-        return isCurrentLocation;
-    }
-
-    public List<SingleDayWeatherForecast> getWeatherForecastEntries() {
+    /**
+     * Returns list of weather forecast (for each day)
+     * @return
+     */
+    public List<WeatherForecastSingleDayEntry> getWeatherForecastEntries() {
         return weatherForecastEntries;
-    }
-
-    @Override
-    public String toString() {
-        return "WeatherForecast{" +
-                "cityname='" + cityname + '\'' +
-                ", weatherForecastEntries=" + weatherForecastEntries +
-                '}';
     }
 }
 

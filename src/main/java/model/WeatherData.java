@@ -33,14 +33,26 @@ public class WeatherData {
         this.weatherForecast = weatherForecast;
     }
 
+    /**
+     * Returns Location object
+     * @return
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * Returns CurrentWeather object
+     * @return
+     */
     public CurrentWeather getCurrentWeather() {
         return currentWeather;
     }
 
+    /**
+     * Returns WeatherForecast object
+     * @return
+     */
     public WeatherForecast getWeatherForecast() {
         return weatherForecast;
     }

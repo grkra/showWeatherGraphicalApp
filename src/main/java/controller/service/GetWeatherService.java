@@ -136,7 +136,7 @@ public class GetWeatherService extends Service<WeatherData> {
         int httpResponseStatusCode = httpResponseWeatherForecast.statusCode();
 
         if (httpResponseStatusCode >= 200 && httpResponseStatusCode < 300) {
-            List<SingleDayWeatherForecast> weatherEntriesForEachDay = new ArrayList<>();
+            List<WeatherForecastSingleDayEntry> weatherEntriesForEachDay = new ArrayList<>();
 
             ObjectMapper jsonMapper = new ObjectMapper();
             JsonNode jsonRoot = jsonMapper.readTree(httpResponseWeatherForecast.body());
@@ -153,7 +153,7 @@ public class GetWeatherService extends Service<WeatherData> {
                     String iconCode = jsonNodeWeatherForecastSingleDay.get("weather").get(0).get("icon").asString();
                     String temperature = jsonNodeWeatherForecastSingleDay.get("main").get("temp").asString() + " °C";
 
-                    weatherEntriesForEachDay.add(new SingleDayWeatherForecast(localDate, iconCode, temperature));
+                    weatherEntriesForEachDay.add(new WeatherForecastSingleDayEntry(localDate, iconCode, temperature));
                 }
             }
 
