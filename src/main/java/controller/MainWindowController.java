@@ -141,8 +141,6 @@ public class MainWindowController implements Initializable {
     private Node[][] weatherForecastGridElements;
     private Location currentLocation;
     private Location destinationLocation;
-    private CurrentWeather currentWeather;
-    private WeatherForecast weatherForecast;
     private WeatherData currentLocationWeather;
     private WeatherData destinationWeather;
     private LocalDate[] weatherForecastDates;
