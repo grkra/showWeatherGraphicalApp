@@ -85,7 +85,7 @@ public class MainWindowController implements Initializable {
     private GridPane weatherForecastGrid;
 
     @FXML
-    private Label weatherForecastLabel;
+    private VBox weatherForecastSection;
 
     @FXML
     private Label weatherForecastLabel01;
@@ -218,6 +218,11 @@ public class MainWindowController implements Initializable {
                 {this.weatherForecastLabel02, this.weatherForecastVbox12, this.weatherForecastVbox22, this.weatherForecastVbox32, this.weatherForecastVbox42, this.weatherForecastVbox52}
         };
 
+        // Set 1. line of weather forecast grig - dates:
+        for (int i = 0; i < 5; i++) {
+            ((Label) this.weatherForecastGridElements[0][i + 1]).setText(setDayAlias(this.weatherForecastDates[i]));
+        }
+
         // GetLocationService
         this.locationService.setOnSucceeded(
                 workerStateEvent -> {
@@ -237,6 +242,7 @@ public class MainWindowController implements Initializable {
                 workerStateEvent -> {
                     WeatherData weatherData = this.weatherService.getValue();
 
+                    // Current weather section
                     if (weatherData.getLocation().getIsCurrentLocation()) {
                         this.currentLocationWeather=weatherData;
 
@@ -265,13 +271,12 @@ public class MainWindowController implements Initializable {
                         this.errorLabel.setText("");
                     }
 
-                    this.weatherForecastLabel.setText("Weather forecast");
+                    // Weather forecast section
+                    this.weatherForecastSection.setVisible(true);
 
                     if (weatherData.getLocation().getIsCurrentLocation()) {
                         ((Label) this.weatherForecastGridElements[1][0]).setText(this.currentLocationWeather.getLocation().getName());
                         for (int i = 0; i < this.currentLocationWeather.getWeatherForecast().getWeatherForecastEntries().size(); i++) {
-                            // Set 1. line - days
-                            ((Label) this.weatherForecastGridElements[0][i + 1]).setText(setDayAlias(this.weatherForecastDates[i]));
 
                             // Set 2. line - current location weather forecast
                             if (this.weatherForecastDates[i].equals(this.currentLocationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getLocalDate())) {
@@ -282,10 +287,8 @@ public class MainWindowController implements Initializable {
                     } else {
                         ((Label) this.weatherForecastGridElements[2][0]).setText(this.destinationWeather.getLocation().getName());
                         for (int i = 0; i < this.destinationWeather.getWeatherForecast().getWeatherForecastEntries().size(); i++) {
-                            // Set 1. line - days
-                            ((Label) this.weatherForecastGridElements[0][i + 1]).setText(setDayAlias(this.weatherForecastDates[i]));
 
-                            // Set 2. line - current location weather forecast
+                            // Set 3. line - destination weather forecast
                             if (this.weatherForecastDates[i].equals(this.destinationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getLocalDate())) {
                                 ((ImageView) ((VBox) this.weatherForecastGridElements[2][i + 1]).getChildren().getFirst()).setImage((new Image("/icons/" + this.destinationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getIconCode() + ".png")));
                                 ((Label) ((VBox) this.weatherForecastGridElements[2][i + 1]).getChildren().getLast()).setText(this.destinationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getFeelsLikeTemperature());
