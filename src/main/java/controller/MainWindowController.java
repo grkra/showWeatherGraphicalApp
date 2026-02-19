@@ -144,12 +144,19 @@ public class MainWindowController implements Initializable {
     private LocalDate[] weatherForecastDates;
 
     public MainWindowController() {
+        // initialize WeatherData objects
         this.currentLocationWeather = new WeatherData(new Location(true));
         this.destinationWeather = new WeatherData(new Location(false));
+
+        // initialize array of 5 days starting tomorrow (to be displayed in weather forecast section)
         this.weatherForecastDates = new LocalDate[5];
         for (int i = 0; i < 5; i++) {
             this.weatherForecastDates[i] = LocalDate.now().plusDays(1 + i);
         }
+
+        // initialize services
+        this.locationService = new GetLocationService();
+        this.weatherService = new GetWeatherService();
     }
 
     /**
@@ -211,8 +218,7 @@ public class MainWindowController implements Initializable {
                 {this.weatherForecastLabel02, this.weatherForecastVbox12, this.weatherForecastVbox22, this.weatherForecastVbox32, this.weatherForecastVbox42, this.weatherForecastVbox52}
         };
 
-        // LocationService
-        this.locationService = new GetLocationService();
+        // GetLocationService
         this.locationService.setOnSucceeded(
                 workerStateEvent -> {
                     this.currentLocationWeather.setLocation(this.locationService.getValue());
@@ -226,15 +232,13 @@ public class MainWindowController implements Initializable {
                     this.errorLabel.setText("Couldn't check current location. Please try later or type it.");
                 });
 
-        // GetCurrentWeatherService
-        this.weatherService = new GetWeatherService();
+        // GetWeatherService
         this.weatherService.setOnSucceeded(
                 workerStateEvent -> {
                     WeatherData weatherData = this.weatherService.getValue();
 
                     if (weatherData.getLocation().getIsCurrentLocation()) {
                         this.currentLocationWeather=weatherData;
-//                        this.currentLocation = this.currentLocationWeather.getLocation();
 
                         this.currentLocationIcon.setImage(new Image("/icons/" + this.currentLocationWeather.getCurrentWeather().getIconCode() + ".png"));
                         this.currentLocationDescriptionLable.setText(this.currentLocationWeather.getCurrentWeather().getDescription());
@@ -297,6 +301,12 @@ public class MainWindowController implements Initializable {
                 });
     }
 
+    /**
+     * Method transforms date (LocalDate object) to name: tomorrow or name of a day
+     * Method is used to display names of days in weather forecast section.
+     * @param weatherForecastDate (LocalDate) date to be displayed in weather forecast section
+     * @return (String) name of a day
+     */
     private String setDayAlias(LocalDate weatherForecastDate) {
         LocalDate today = LocalDate.now();
         if (weatherForecastDate.equals(today.plusDays(1))) {
