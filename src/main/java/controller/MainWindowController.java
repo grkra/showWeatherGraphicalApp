@@ -211,14 +211,20 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Weather forecast grid:
+        // Initializes array with Weather forecast grid cells.
+        // You can't iterate through Grid Pane from JavaFX - it's not an array.
+        // To be able to easily set values to Grid cells, every cell is saved to this array.
+        // Then inside weatherService.setOnSucceeded() service there are loops which iterate through this array, and save values to its cells.
+        // Each array cell contains pointer to grid cell in application window.
+        // This way values are saved to Grid Pane in Weather forecast section of window.
+        // Without that array you would have to manually set values to every of these pointers (this.weatherForecastLabel10 etc)
         this.weatherForecastGridElements = new Node[][]{
                 {null, this.weatherForecastLabel10, this.weatherForecastLabel20, this.weatherForecastLabel30, this.weatherForecastLabel40, this.weatherForecastLabel50},
                 {this.weatherForecastLabel01, this.weatherForecastVbox11, this.weatherForecastVbox21, this.weatherForecastVbox31, this.weatherForecastVbox41, this.weatherForecastVbox51},
                 {this.weatherForecastLabel02, this.weatherForecastVbox12, this.weatherForecastVbox22, this.weatherForecastVbox32, this.weatherForecastVbox42, this.weatherForecastVbox52}
         };
 
-        // Set 1. line of weather forecast grig - dates:
+        // Pass values to 1. line of weather forecast grid - dates:
         for (int i = 0; i < 5; i++) {
             ((Label) this.weatherForecastGridElements[0][i + 1]).setText(setDayAlias(this.weatherForecastDates[i]));
         }
@@ -283,6 +289,10 @@ public class MainWindowController implements Initializable {
                                 ((ImageView) ((VBox) this.weatherForecastGridElements[1][i + 1]).getChildren().getFirst()).setImage((new Image("/icons/" + this.currentLocationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getIconCode() + ".png")));
                                 ((Label) ((VBox) this.weatherForecastGridElements[1][i + 1]).getChildren().getLast()).setText(this.currentLocationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getFeelsLikeTemperature());
                             }
+                        }
+                        for (int i = 0; i < 6; i++) {
+                            this.weatherForecastGridElements[1][i].setVisible(true);
+                            this.weatherForecastGridElements[1][i].setManaged(true);
                         }
                     } else {
                         ((Label) this.weatherForecastGridElements[2][0]).setText(this.destinationWeather.getLocation().getName());

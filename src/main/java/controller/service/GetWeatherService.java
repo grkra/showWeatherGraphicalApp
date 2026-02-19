@@ -146,7 +146,7 @@ public class GetWeatherService extends Service<WeatherData> {
                 Instant instantDateTime = Instant.ofEpochSecond(jsonNodeWeatherForecastSingleDay.get("dt").asLong());
                 ZonedDateTime zonedDateTime = instantDateTime.atZone(ZoneId.systemDefault());
                 LocalDate localDate = zonedDateTime.toLocalDate();
-                System.out.println(zonedDateTime);
+
                 if (localDate.isAfter(LocalDate.now())
                         &&
                         zonedDateTime.getHour() >= 11 && zonedDateTime.getHour() <= 13) {

@@ -134,21 +134,21 @@
                         <Label fx:id="weatherForecastLabel30" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.vgrow="SOMETIMES" />
                         <Label fx:id="weatherForecastLabel40" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.vgrow="SOMETIMES" />
                         <Label fx:id="weatherForecastLabel50" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.vgrow="SOMETIMES" />
-                        <Label fx:id="weatherForecastLabel01" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <Label fx:id="weatherForecastLabel01" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" visible="false" managed="flase"/>
                         <Label fx:id="weatherForecastLabel02" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
-                        <VBox fx:id="weatherForecastVbox11" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <VBox fx:id="weatherForecastVbox11" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" visible="false" managed="flase">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
-                        <VBox fx:id="weatherForecastVbox21" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <VBox fx:id="weatherForecastVbox21" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" visible="false" managed="flase">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
-                        <VBox fx:id="weatherForecastVbox31" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <VBox fx:id="weatherForecastVbox31" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1" visible="false" managed="flase">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
@@ -166,7 +166,7 @@
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
-                        <VBox fx:id="weatherForecastVbox41" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <VBox fx:id="weatherForecastVbox41" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1" visible="false" managed="flase">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
@@ -184,7 +184,7 @@
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
                            </children>
                         </VBox>
-                        <VBox fx:id="weatherForecastVbox51" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                        <VBox fx:id="weatherForecastVbox51" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1" visible="false" managed="flase">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
