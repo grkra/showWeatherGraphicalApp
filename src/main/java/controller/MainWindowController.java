@@ -25,9 +25,6 @@ import java.util.ResourceBundle;
  */
 public class MainWindowController implements Initializable {
     @FXML
-    private Label errorLabel;
-
-    @FXML
     private Label currentLocationCloudinessLabel;
 
     @FXML
@@ -50,6 +47,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Label currentLocationTemperatureLabel;
+
+    @FXML
+    private VBox currentLocationWeatherVbox;
 
     @FXML
     private Label currentLocationWindSpeedLabel;
@@ -79,13 +79,16 @@ public class MainWindowController implements Initializable {
     private Label destinationTemperatureLabel;
 
     @FXML
+    private VBox destinationWeatherVbox;
+
+    @FXML
     private Label destinationWindSpeedLabel;
 
     @FXML
-    private GridPane weatherForecastGrid;
+    private Label errorLabel;
 
-    @FXML
-    private VBox weatherForecastSection;
+//    @FXML
+//    private GridPane weatherForecastGrid;
 
     @FXML
     private Label weatherForecastLabel01;
@@ -107,6 +110,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Label weatherForecastLabel50;
+
+    @FXML
+    private VBox weatherForecastSection;
 
     @FXML
     private VBox weatherForecastVbox11;
@@ -250,30 +256,33 @@ public class MainWindowController implements Initializable {
 
                     // Current weather section
                     if (weatherData.getLocation().getIsCurrentLocation()) {
-                        this.currentLocationWeather=weatherData;
+                        this.currentLocationWeather = weatherData;
 
                         this.currentLocationIcon.setImage(new Image("/icons/" + this.currentLocationWeather.getCurrentWeather().getIconCode() + ".png"));
                         this.currentLocationDescriptionLable.setText(this.currentLocationWeather.getCurrentWeather().getDescription());
-                        this.currentLocationTemperatureLabel.setText("Temperature: " + this.currentLocationWeather.getCurrentWeather().getTemperature());
-                        this.currentLocationFeelsLikeTemperatureLabel.setText("Feels like: " + this.currentLocationWeather.getCurrentWeather().getFeelsLikeTemperature());
-                        this.currentLocationWindSpeedLabel.setText("Wind speed: " + this.currentLocationWeather.getCurrentWeather().getWindSpeed());
-                        this.currentLocationCloudinessLabel.setText("Cloudiness: " + this.currentLocationWeather.getCurrentWeather().getCloudiness());
-                        this.currentLocationHumidityLabel.setText("Humidity: " + this.currentLocationWeather.getCurrentWeather().getHumidity());
-                        this.currentLocationPressureLabel.setText("Pressure: " + this.currentLocationWeather.getCurrentWeather().getPressure());
+                        this.currentLocationTemperatureLabel.setText(this.currentLocationWeather.getCurrentWeather().getTemperature());
+                        this.currentLocationFeelsLikeTemperatureLabel.setText(this.currentLocationWeather.getCurrentWeather().getFeelsLikeTemperature());
+                        this.currentLocationWindSpeedLabel.setText(this.currentLocationWeather.getCurrentWeather().getWindSpeed());
+                        this.currentLocationCloudinessLabel.setText(this.currentLocationWeather.getCurrentWeather().getCloudiness());
+                        this.currentLocationHumidityLabel.setText(this.currentLocationWeather.getCurrentWeather().getHumidity());
+                        this.currentLocationPressureLabel.setText(this.currentLocationWeather.getCurrentWeather().getPressure());
+
+                        this.currentLocationWeatherVbox.setVisible(true);
 
                         this.errorLabel.setText("");
                     } else {
-                        this.destinationWeather=weatherData;
+                        this.destinationWeather = weatherData;
 
                         this.destinationIcon.setImage(new Image("/icons/" + this.destinationWeather.getCurrentWeather().getIconCode() + ".png"));
                         this.destinationDescriptionLable.setText(this.destinationWeather.getCurrentWeather().getDescription());
-                        this.destinationTemperatureLabel.setText("Temperature: " + this.destinationWeather.getCurrentWeather().getTemperature());
-                        this.destinationFeelsLikeTemperatureLabel.setText("Feels like: " + this.destinationWeather.getCurrentWeather().getFeelsLikeTemperature());
-                        this.destinationWindSpeedLabel.setText("Wind speed: " + this.destinationWeather.getCurrentWeather().getWindSpeed());
-                        this.destinationCloudinessLabel.setText("Cloudiness: " + this.destinationWeather.getCurrentWeather().getCloudiness());
-                        this.destinationHumidityLabel.setText("Humidity: " + this.destinationWeather.getCurrentWeather().getHumidity());
-                        this.destinationPressureLabel.setText("Pressure: " + this.destinationWeather.getCurrentWeather().getPressure());
+                        this.destinationTemperatureLabel.setText(this.destinationWeather.getCurrentWeather().getTemperature());
+                        this.destinationFeelsLikeTemperatureLabel.setText(this.destinationWeather.getCurrentWeather().getFeelsLikeTemperature());
+                        this.destinationWindSpeedLabel.setText(this.destinationWeather.getCurrentWeather().getWindSpeed());
+                        this.destinationCloudinessLabel.setText(this.destinationWeather.getCurrentWeather().getCloudiness());
+                        this.destinationHumidityLabel.setText(this.destinationWeather.getCurrentWeather().getHumidity());
+                        this.destinationPressureLabel.setText(this.destinationWeather.getCurrentWeather().getPressure());
 
+                        this.destinationWeatherVbox.setVisible(true);
                         this.errorLabel.setText("");
                     }
 
@@ -290,6 +299,7 @@ public class MainWindowController implements Initializable {
                                 ((Label) ((VBox) this.weatherForecastGridElements[1][i + 1]).getChildren().getLast()).setText(this.currentLocationWeather.getWeatherForecast().getWeatherForecastEntries().get(i).getFeelsLikeTemperature());
                             }
                         }
+
                         for (int i = 0; i < 6; i++) {
                             this.weatherForecastGridElements[1][i].setVisible(true);
                             this.weatherForecastGridElements[1][i].setManaged(true);
@@ -317,6 +327,7 @@ public class MainWindowController implements Initializable {
     /**
      * Method transforms date (LocalDate object) to name: tomorrow or name of a day
      * Method is used to display names of days in weather forecast section.
+     *
      * @param weatherForecastDate (LocalDate) date to be displayed in weather forecast section
      * @return (String) name of a day
      */
@@ -332,6 +343,7 @@ public class MainWindowController implements Initializable {
 
     /**
      * Method checks if field to type location isn't empty or blank.
+     *
      * @param typedCityName (String) - value typed in TextField
      * @return fale - if text field was blank or empty, true otherwise
      */
@@ -347,7 +359,8 @@ public class MainWindowController implements Initializable {
      * If it is different, that means user typed new (different) city.
      * In this case method clears longitude and latitude in the location object
      * so getWeather services use city name to get data (and not longitude and latitude).
-     * @param typedCityName (String) city name typed in text field
+     *
+     * @param typedCityName  (String) city name typed in text field
      * @param locationObject (Location) currentLocation or destinationLocation
      */
     private void setLocation(String typedCityName, Location locationObject) {
