@@ -112,12 +112,12 @@ public class GetWeatherService extends Service<WeatherData> {
             String iconCode = jsonRoot.get("weather").get(0).get("icon").asString();
             String description = jsonRoot.get("weather").get(0).get("description").asString();
             description = description.substring(0, 1).toUpperCase() + description.substring(1);
-            String temperature = jsonRoot.get("main").get("temp").asString() + " °C";
-            String feelsLikeTemperature = jsonRoot.get("main").get("feels_like").asString() + " °C";
-            String windSpeed = jsonRoot.get("wind").get("speed").asString() + " m/s";
-            String cloudiness = jsonRoot.get("clouds").get("all").asString() + " %";
-            String humidity = jsonRoot.get("main").get("humidity").asString() + " %";
-            String pressure = jsonRoot.get("main").get("pressure").asString() + " hPa";
+            String temperature = jsonRoot.get("main").get("temp").asString();
+            String feelsLikeTemperature = jsonRoot.get("main").get("feels_like").asString();
+            String windSpeed = jsonRoot.get("wind").get("speed").asString();
+            String cloudiness = jsonRoot.get("clouds").get("all").asString();
+            String humidity = jsonRoot.get("main").get("humidity").asString();
+            String pressure = jsonRoot.get("main").get("pressure").asString();
 
             return new CurrentWeather(iconCode, description, temperature, feelsLikeTemperature, windSpeed, cloudiness, humidity, pressure);
         } else {
@@ -152,7 +152,7 @@ public class GetWeatherService extends Service<WeatherData> {
                         zonedDateTime.getHour() >= 11 && zonedDateTime.getHour() <= 13) {
 
                     String iconCode = jsonNodeWeatherForecastSingleDay.get("weather").get(0).get("icon").asString();
-                    String temperature = jsonNodeWeatherForecastSingleDay.get("main").get("temp").asString() + " °C";
+                    String temperature = jsonNodeWeatherForecastSingleDay.get("main").get("temp").asString();
 
                     weatherEntriesForEachDay.add(new WeatherForecastSingleDayEntry(localDate, iconCode, temperature));
                 }
