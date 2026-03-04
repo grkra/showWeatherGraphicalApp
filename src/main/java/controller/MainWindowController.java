@@ -9,12 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Location;
-import model.CurrentWeather;
 import model.WeatherData;
-import model.WeatherForecast;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -196,22 +193,30 @@ public class MainWindowController implements Initializable {
      */
     @FXML
     void checkCurrentLocationWeatherButtonAction() {
-        if (this.checkIfFieldNotBlank(this.currentLocationField.getText())) {
-            setLocation(this.currentLocationField.getText(), this.currentLocationWeather.getLocation());
+        if (this.validateField(this.currentLocationField)) {
+            this.errorLabel.setText("");
+
+            updateLocationIfNecessary(this.currentLocationField, this.currentLocationWeather.getLocation());
 
             this.weatherService.setLocation(this.currentLocationWeather.getLocation());
             this.weatherService.restart();
+        } else {
+            this.errorLabel.setText("Please fill the location first.");
         }
     }
 
     @FXML
     void checkDestinationWeatherButtonAction() {
 
-        if (this.checkIfFieldNotBlank(this.destinationField.getText())) {
+        if (this.validateField(this.destinationField)) {
+            this.errorLabel.setText("");
 
-            setLocation(this.destinationField.getText(), this.destinationWeather.getLocation());
+            updateLocationIfNecessary(this.destinationField, this.destinationWeather.getLocation());
+
             this.weatherService.setLocation(this.destinationWeather.getLocation());
             this.weatherService.restart();
+        } else {
+            this.errorLabel.setText("Please fill the location first.");
         }
     }
 
@@ -344,30 +349,36 @@ public class MainWindowController implements Initializable {
     /**
      * Method checks if field to type location isn't empty or blank.
      *
-     * @param typedCityName (String) - value typed in TextField
-     * @return fale - if text field was blank or empty, true otherwise
+     * @param textField (TextField) - text field used to fill city name in current location or destination section.
+     * @return fale - if text field is blank or empty, true otherwise
      */
-    private boolean checkIfFieldNotBlank(String typedCityName) {
-        if (typedCityName.isBlank()) {
+    private boolean validateField (TextField textField) {
+        if (textField.getText().isBlank()) {
             return false;
         }
         return true;
     }
 
     /**
-     * Method checks if city name typed in text field is different from this saved in location object.
-     * If it is different, that means user typed new (different) city.
-     * In this case method clears longitude and latitude in the location object
-     * so getWeather services use city name to get data (and not longitude and latitude).
+     * Method updates Location object before sending request if necessary.
+     * <ul>
+     *     <li>If city name typed in text field is different from city name saved in Location object, it means, a user typed new city.
+     *      In this case method clears longitude and latitude in the location object,
+     *      and getWeather services will use city name to get data (and not longitude and latitude).</li>
+     *      <li> Otherwise it means, a user didn't type new city, and it is still the same location as in previous request.
+     *      In this case method doesn't update location object,
+     *      and getWeather services will use longitude and latitude to get data (and not city name).
+     *      </li>
+     * </ul>
      *
-     * @param typedCityName  (String) city name typed in text field
-     * @param locationObject (Location) currentLocation or destinationLocation
+     * @param textField (TextField) - text field used to fill city name in current location or destination section.
+     * @param location (Location) currentLocation or destinationLocation
      */
-    private void setLocation(String typedCityName, Location locationObject) {
-        if (!typedCityName.equalsIgnoreCase(locationObject.getName())) {
-            locationObject.setName(typedCityName);
-            locationObject.setLongitude("");
-            locationObject.setLatitude("");
+    private void updateLocationIfNecessary (TextField textField, Location location) {
+        if (!textField.getText().equalsIgnoreCase(location.getName())) {
+            location.setName(textField.getText());
+            location.setLongitude("");
+            location.setLatitude("");
         }
     }
 }
