@@ -62,6 +62,15 @@
                         </HBox>
                         <VBox fx:id="currentLocationWeatherVbox" alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
                            <children>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="148.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
+                                 <children>
+                                    <Label fx:id="currentLocationName" />
+                                    <Label layoutX="196.0" layoutY="10.0" text="lat:" />
+                                    <Label fx:id="currentLocationLatitude" />
+                                    <Label layoutX="193.0" layoutY="10.0" text="lon:" />
+                                    <Label fx:id="currentLocationLongitude" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                                 </children>
+                              </HBox>
                               <ImageView fx:id="currentLocationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="currentLocationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" />
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
@@ -133,8 +142,17 @@
                         </HBox>
                         <VBox fx:id="destinationWeatherVbox" alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
                            <children>
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
+                                 <children>
+                                    <Label fx:id="destinationName" />
+                                    <Label layoutX="196.0" layoutY="10.0" text="lat:" />
+                                    <Label fx:id="destinationLatitude" />
+                                    <Label layoutX="193.0" layoutY="10.0" text="lon:" />
+                                    <Label fx:id="destinationLongitude" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                                 </children>
+                              </HBox>
                               <ImageView fx:id="destinationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="destinationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <Label fx:id="destinationDescriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
                                     <Label text="Temperature:" />

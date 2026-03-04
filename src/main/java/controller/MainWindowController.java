@@ -40,6 +40,15 @@ public class MainWindowController implements Initializable {
     private ImageView currentLocationIcon;
 
     @FXML
+    private Label currentLocationLatitude;
+
+    @FXML
+    private Label currentLocationLongitude;
+
+    @FXML
+    private Label currentLocationName;
+
+    @FXML
     private Label currentLocationPressureLabel;
 
     @FXML
@@ -55,7 +64,7 @@ public class MainWindowController implements Initializable {
     private Label destinationCloudinessLabel;
 
     @FXML
-    private Label destinationDescriptionLable;
+    private Label destinationDescriptionLabel;
 
     @FXML
     private Label destinationFeelsLikeTemperatureLabel;
@@ -68,6 +77,15 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private ImageView destinationIcon;
+
+    @FXML
+    private Label destinationLatitude;
+
+    @FXML
+    private Label destinationLongitude;
+
+    @FXML
+    private Label destinationName;
 
     @FXML
     private Label destinationPressureLabel;
@@ -83,9 +101,6 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Label errorLabel;
-
-//    @FXML
-//    private GridPane weatherForecastGrid;
 
     @FXML
     private Label weatherForecastLabel01;
@@ -263,6 +278,10 @@ public class MainWindowController implements Initializable {
                     if (weatherData.getLocation().getIsCurrentLocation()) {
                         this.currentLocationWeather = weatherData;
 
+                        this.currentLocationName.setText(this.currentLocationWeather.getLocation().getName());
+                        this.currentLocationLatitude.setText(this.currentLocationWeather.getLocation().getLatitude());
+                        this.currentLocationLongitude.setText(this.currentLocationWeather.getLocation().getLongitude());
+
                         this.currentLocationIcon.setImage(new Image("/icons/" + this.currentLocationWeather.getCurrentWeather().getIconCode() + ".png"));
                         this.currentLocationDescriptionLable.setText(this.currentLocationWeather.getCurrentWeather().getDescription());
                         this.currentLocationTemperatureLabel.setText(this.currentLocationWeather.getCurrentWeather().getTemperature());
@@ -278,8 +297,12 @@ public class MainWindowController implements Initializable {
                     } else {
                         this.destinationWeather = weatherData;
 
+                        this.destinationName.setText(this.destinationWeather.getLocation().getName());
+                        this.destinationLatitude.setText(this.destinationWeather.getLocation().getLatitude());
+                        this.destinationLongitude.setText(this.destinationWeather.getLocation().getLongitude());
+
                         this.destinationIcon.setImage(new Image("/icons/" + this.destinationWeather.getCurrentWeather().getIconCode() + ".png"));
-                        this.destinationDescriptionLable.setText(this.destinationWeather.getCurrentWeather().getDescription());
+                        this.destinationDescriptionLabel.setText(this.destinationWeather.getCurrentWeather().getDescription());
                         this.destinationTemperatureLabel.setText(this.destinationWeather.getCurrentWeather().getTemperature());
                         this.destinationFeelsLikeTemperatureLabel.setText(this.destinationWeather.getCurrentWeather().getFeelsLikeTemperature());
                         this.destinationWindSpeedLabel.setText(this.destinationWeather.getCurrentWeather().getWindSpeed());
