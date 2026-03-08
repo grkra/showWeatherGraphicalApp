@@ -52,13 +52,14 @@ public class GetWeatherService extends Service<WeatherData> {
                 HttpRequest httpRequestCurrentWether;
                 HttpRequest httpRequestWeatherForecast;
                 if (location.getLatitude().isBlank() || location.getLongitude().isBlank()) {
+                    String locationNameNoSpaces = location.getName().replace(" ", "%20");
                     httpRequestCurrentWether = HttpRequest.newBuilder()
-                            .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?q=" + location.getName() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                            .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?q=" + locationNameNoSpaces + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
                             .timeout(Duration.ofSeconds(5))
                             .GET()
                             .build();
                     httpRequestWeatherForecast = HttpRequest.newBuilder()
-                            .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?q=" + location.getName() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                            .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?q=" + locationNameNoSpaces + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
                             .timeout(Duration.ofSeconds(5))
                             .GET()
                             .build();

@@ -38,7 +38,22 @@ public class Location {
     }
 
     public void setName(String name) {
-        this.name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        StringBuilder stringBuilder = new StringBuilder(name.length());
+        boolean isNewWord = true;
+
+        for (char character: name.toCharArray()) {
+            if (Character.isLetter(character)) {
+                if (isNewWord) {
+                    character = Character.toUpperCase(character);
+                    isNewWord = false;
+                }
+            } else {
+                isNewWord = true;
+            }
+            stringBuilder.append(character);
+        }
+
+        this.name = stringBuilder.toString();
     }
 
     public String getLongitude() {
