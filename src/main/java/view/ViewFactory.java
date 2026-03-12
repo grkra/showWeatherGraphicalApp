@@ -14,11 +14,19 @@ import java.io.IOException;
  */
 public class ViewFactory {
 
+    /**
+     * Method displays main window of the application.
+     */
     public void showMainWindow() {
         BaseController controller = new MainWindowController("MainWindow");
         showWindow(controller);
     }
 
+    /**
+     * Method is used to initialize and display window of the application.
+     * It is important to pass right controller, because it is used to find right fxml file.
+     * @param controller (BaseController) controller connected with the window being displayed.
+     */
     private void showWindow(BaseController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/" + controller.getFxmlName() + ".fxml"));
         fxmlLoader.setController(controller);
