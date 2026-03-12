@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import view.ViewFactory;
 
 public class Launcher extends Application {
 
@@ -15,9 +16,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent parent = FXMLLoader.load(getClass().getResource("/fxml_files/MainWindow.fxml"));
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
+        ViewFactory viewFactory = new ViewFactory();
+        viewFactory.showMainWindow();
     }
 }

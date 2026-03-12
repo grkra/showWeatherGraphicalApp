@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * Controller of the main window of the application.
  */
-public class MainWindowController implements Initializable {
+public class MainWindowController extends BaseController implements Initializable {
     @FXML
     private Label currentLocationCloudinessLabel;
 
@@ -161,7 +161,12 @@ public class MainWindowController implements Initializable {
     private WeatherData destinationWeather;
     private LocalDate[] weatherForecastDates;
 
-    public MainWindowController() {
+    /**
+     * Constructor of the class MainWindowController
+     * @param fxmlName (String) - name of the fxml file connected with the controller.
+     */
+    public MainWindowController(String fxmlName) {
+        super(fxmlName);
         // initialize WeatherData objects
         this.currentLocationWeather = new WeatherData(new Location(true));
         this.destinationWeather = new WeatherData(new Location(false));
