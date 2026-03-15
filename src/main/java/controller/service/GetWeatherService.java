@@ -37,7 +37,7 @@ public class GetWeatherService extends Service<WeatherData> {
      * Constructor of the GetSurrentWeather service.
      * It initializes http client object for the requests to API.
      */
-    public GetWeatherService() {
+    GetWeatherService() {
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(5))
                 .build();

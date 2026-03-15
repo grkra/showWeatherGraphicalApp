@@ -2,6 +2,7 @@ package controller;
 
 import controller.service.GetWeatherService;
 import controller.service.GetLocationService;
+import controller.service.GetWeatherServiceFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -179,7 +180,7 @@ public class MainWindowController extends BaseController implements Initializabl
 
         // initialize services
         this.locationService = new GetLocationService();
-        this.weatherService = new GetWeatherService();
+        this.weatherService = GetWeatherServiceFactory.createGetWeatherService();
     }
 
     /**
