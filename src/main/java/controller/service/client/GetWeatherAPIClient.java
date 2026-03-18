@@ -25,7 +25,7 @@ public interface GetWeatherAPIClient {
      *
      * @param location - (Location) city to check weather.
      */
-    void setLocation(Location location);
+//    void setLocation(Location location);
 
     /**
      * Method is used to send request to API providing weather forecast.
@@ -40,5 +40,5 @@ public interface GetWeatherAPIClient {
      * @return new WeatherData object containing CurrentWeather, WeatherForecast, Location.
      * @throws IOException
      */
-    WeatherData getWeather() throws IOException;
+    WeatherData getWeather(Location location) throws IOException;
 }

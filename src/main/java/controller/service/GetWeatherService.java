@@ -31,17 +31,18 @@ public class GetWeatherService extends Service<WeatherData> {
             @Override
             protected WeatherData call() throws Exception {
 
-                return getWeatherAPIClient.getWeather();
+                return getWeatherAPIClient.getWeather(location);
             }
         };
     }
 
     /**
-     * Method passes location to GetWeatherAPIClient object (client used in the service).
+     * Method sets location in GetWeatherService object.
+     * Then Location is used to get weather from API.
      *
      * @param location - (Location) city to check weather.
      */
     public void setLocation(Location location) {
-        this.getWeatherAPIClient.setLocation(location);
+        this.location = location;
     }
 }

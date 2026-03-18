@@ -22,11 +22,6 @@ import java.util.List;
 public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
 
     /**
-     * Location for which weather is being checked.
-     */
-    private Location location;
-
-    /**
      * Connection object used to send HTTP request and get responses from API.
      */
     private HttpClient httpClient;
@@ -42,11 +37,11 @@ public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
     }
 
 
-    public WeatherData getWeather () throws IOException {
+    public WeatherData getWeather (Location location) throws IOException {
         HttpRequest httpRequestCurrentWeather;
         HttpRequest httpRequestWeatherForecast;
-        if (this.location.getLatitude().isBlank() || this.location.getLongitude().isBlank()) {
-            String locationNameNoSpaces = this.location.getName().replace(" ", "%20");
+        if (location.getLatitude().isBlank() || location.getLongitude().isBlank()) {
+            String locationNameNoSpaces = location.getName().replace(" ", "%20");
             httpRequestCurrentWeather = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?q=" + locationNameNoSpaces + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
                     .timeout(Duration.ofSeconds(5))
@@ -59,12 +54,12 @@ public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
                     .build();
         } else {
             httpRequestCurrentWeather = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?lat=" + this.location.getLatitude() + "&lon=" + this.location.getLongitude() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                    .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
                     .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();
             httpRequestWeatherForecast = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?lat=" + this.location.getLatitude() + "&lon=" + this.location.getLongitude() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                    .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
                     .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();
@@ -77,11 +72,11 @@ public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
             CurrentWeather currentWeather = getCurrentWeatherFromResponse(httpResponseCurrentWeather);
             WeatherForecast weatherForecast = getWeatherForecastFromResponse(httpResponseWeatherForecast);
 
-            if (this.location.getLongitude().isBlank() || this.location.getLatitude().isBlank()) {
-                this.location = getLocationFromResponse(httpResponseCurrentWeather);
+            if (location.getLongitude().isBlank() || location.getLatitude().isBlank()) {
+                location = updateLocationLongitudeLatitudeFromResponse(httpResponseCurrentWeather, location);
             }
 
-            return new WeatherData(this.location, currentWeather, weatherForecast);
+            return new WeatherData(location, currentWeather, weatherForecast);
         } catch (Exception e) {
             throw new IOException("Connection error", e);
         }
@@ -164,7 +159,7 @@ public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
      * @return new Location object
      * @throws IOException
      */
-    private Location getLocationFromResponse(HttpResponse<String> httpResponseCurrentWeather) throws IOException {
+    private Location updateLocationLongitudeLatitudeFromResponse(HttpResponse<String> httpResponseCurrentWeather, Location location) throws IOException {
         int httpResponseStatusCode = httpResponseCurrentWeather.statusCode();
 
         if (httpResponseStatusCode >= 200 && httpResponseStatusCode < 300) {
@@ -173,19 +168,9 @@ public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
             JsonNode jsonRoot = jsonMapper.readTree(httpResponseCurrentWeather.body());
             String longitude = jsonRoot.get("coord").get("lon").asString();
             String latitude = jsonRoot.get("coord").get("lat").asString();
-            return new Location(this.location.getName(), longitude, latitude, this.location.getIsCurrentLocation());
+            return new Location(location.getName(), longitude, latitude, location.getIsCurrentLocation());
         } else {
             throw new IOException("HTTP Error: " + httpResponseStatusCode);
         }
-    }
-
-    /**
-     * Method sets Location object. Location is necessary to send API request.
-     * First set location, then start service.
-     *
-     * @param location - (Location) city to check weather.
-     */
-    public void setLocation(Location location) {
-        this.location = location;
     }
 }
