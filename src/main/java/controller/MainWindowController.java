@@ -163,6 +163,22 @@ public class MainWindowController extends BaseController implements Initializabl
     private LocalDate[] weatherForecastDates;
 
     /**
+     * Object of the GetLocationService class.
+     * It's service used to get geolocation of a device on which the application works.
+     * It is used when GetCurrentLocation button is clicked.
+     * It is initialized in initialize() method.
+     */
+    GetLocationService locationService;
+
+    /**
+     * Object of the GetCurrentWeatherService class.
+     * It's service used to get current weather for specified location.
+     * It is used when GetWeather button is clicked.
+     * It is initialized in initialize() method.
+     */
+    GetWeatherService weatherService;
+
+    /**
      * Constructor of the class MainWindowController
      * @param fxmlName (String) - name of the fxml file connected with the controller.
      */
@@ -182,22 +198,6 @@ public class MainWindowController extends BaseController implements Initializabl
         this.locationService = new GetLocationService();
         this.weatherService = GetWeatherServiceFactory.createGetWeatherService();
     }
-
-    /**
-     * Object of the GetLocationService class.
-     * It's service used to get geolocation of a device on which the application works.
-     * It is used when GetCurrentLocation button is clicked.
-     * It is initialized in initialize() method.
-     */
-    GetLocationService locationService;
-
-    /**
-     * Object of the GetCurrentWeatherService class.
-     * It's service used to get current weather for specified location.
-     * It is used when GetWeather button is clicked.
-     * It is initialized in initialize() method.
-     */
-    GetWeatherService weatherService;
 
     /**
      * Event listener triggered by clicking on check current location button.
@@ -278,6 +278,7 @@ public class MainWindowController extends BaseController implements Initializabl
         // GetWeatherService
         this.weatherService.setOnSucceeded(
                 workerStateEvent -> {
+                    System.out.println(weatherService.getValue());
                     WeatherData weatherData = this.weatherService.getValue();
 
                     // Current weather section
