@@ -301,8 +301,6 @@ public class MainWindowController extends BaseController implements Initializabl
                         this.currentLocationPressureLabel.setText(this.currentLocationWeather.getCurrentWeather().getPressure());
 
                         this.currentLocationWeatherVbox.setVisible(true);
-
-                        this.errorLabel.setText("");
                     } else {
                         this.destinationWeather = weatherData;
 
@@ -320,7 +318,6 @@ public class MainWindowController extends BaseController implements Initializabl
                         this.destinationPressureLabel.setText(this.destinationWeather.getCurrentWeather().getPressure());
 
                         this.destinationWeatherVbox.setVisible(true);
-                        this.errorLabel.setText("");
                     }
 
                     // Weather forecast section
@@ -353,6 +350,9 @@ public class MainWindowController extends BaseController implements Initializabl
 
                         }
                     }
+
+                    // Error section
+                    this.errorLabel.setText("");
                 });
         this.weatherService.setOnFailed(
                 workerStateEvent ->
