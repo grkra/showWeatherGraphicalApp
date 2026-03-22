@@ -18,7 +18,7 @@ public class GetLocationService extends Service<Location> {
      *
      * @param getLocationAPIClient Concrete class implementing GetLocationAPIClient interface used to send request to API returning current location.
      */
-    public GetLocationService(GetLocationAPIClient getLocationAPIClient) {
+    GetLocationService(GetLocationAPIClient getLocationAPIClient) {
         this.getLocationAPIClient = getLocationAPIClient;
     }
 
