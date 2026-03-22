@@ -1,7 +1,10 @@
 package controller;
 
+import controller.service.GetLocationServiceFactory;
 import controller.service.GetWeatherService;
 import controller.service.GetLocationService;
+import controller.service.GetWeatherServiceFactory;
+import controller.service.client.IpApiLocationAPIClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -20,7 +23,7 @@ import java.util.ResourceBundle;
 /**
  * Controller of the main window of the application.
  */
-public class MainWindowController implements Initializable {
+public class MainWindowController extends BaseController implements Initializable {
     @FXML
     private Label currentLocationCloudinessLabel;
 
@@ -161,22 +164,6 @@ public class MainWindowController implements Initializable {
     private WeatherData destinationWeather;
     private LocalDate[] weatherForecastDates;
 
-    public MainWindowController() {
-        // initialize WeatherData objects
-        this.currentLocationWeather = new WeatherData(new Location(true));
-        this.destinationWeather = new WeatherData(new Location(false));
-
-        // initialize array of 5 days starting tomorrow (to be displayed in weather forecast section)
-        this.weatherForecastDates = new LocalDate[5];
-        for (int i = 0; i < 5; i++) {
-            this.weatherForecastDates[i] = LocalDate.now().plusDays(1 + i);
-        }
-
-        // initialize services
-        this.locationService = new GetLocationService();
-        this.weatherService = new GetWeatherService();
-    }
-
     /**
      * Object of the GetLocationService class.
      * It's service used to get geolocation of a device on which the application works.
@@ -192,6 +179,27 @@ public class MainWindowController implements Initializable {
      * It is initialized in initialize() method.
      */
     GetWeatherService weatherService;
+
+    /**
+     * Constructor of the class MainWindowController
+     * @param fxmlName (String) - name of the fxml file connected with the controller.
+     */
+    public MainWindowController(String fxmlName) {
+        super(fxmlName);
+        // initialize WeatherData objects
+        this.currentLocationWeather = new WeatherData(new Location(true));
+        this.destinationWeather = new WeatherData(new Location(false));
+
+        // initialize array of 5 days starting tomorrow (to be displayed in weather forecast section)
+        this.weatherForecastDates = new LocalDate[5];
+        for (int i = 0; i < 5; i++) {
+            this.weatherForecastDates[i] = LocalDate.now().plusDays(1 + i);
+        }
+
+        // initialize services
+        this.locationService = GetLocationServiceFactory.createGetLocationService();
+        this.weatherService = GetWeatherServiceFactory.createGetWeatherService();
+    }
 
     /**
      * Event listener triggered by clicking on check current location button.
@@ -272,6 +280,7 @@ public class MainWindowController implements Initializable {
         // GetWeatherService
         this.weatherService.setOnSucceeded(
                 workerStateEvent -> {
+
                     WeatherData weatherData = this.weatherService.getValue();
 
                     // Current weather section
