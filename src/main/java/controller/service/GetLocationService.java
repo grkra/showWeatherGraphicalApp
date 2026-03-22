@@ -1,17 +1,9 @@
 package controller.service;
 
+import controller.service.client.GetLocationAPIClient;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import model.Location;
-import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
 
 /**
  * Controller responsible for getting current location.
@@ -19,16 +11,15 @@ import java.time.Duration;
  */
 public class GetLocationService extends Service<Location> {
 
-    HttpClient httpClient;
+    private final GetLocationAPIClient getLocationAPIClient;
 
     /**
      * Constructor of the GetLocationService service.
-     * It initializes http client object for the requests to API.
+     *
+     * @param getLocationAPIClient Concrete class implementing GetLocationAPIClient interface used to send request to API returning current location.
      */
-    public GetLocationService() {
-        this.httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(5))
-                .build();
+    public GetLocationService(GetLocationAPIClient getLocationAPIClient) {
+        this.getLocationAPIClient = getLocationAPIClient;
     }
 
     @Override
@@ -37,30 +28,7 @@ public class GetLocationService extends Service<Location> {
             @Override
             protected Location call() throws Exception {
 
-                HttpRequest httpRequest = HttpRequest.newBuilder()
-                        .uri(URI.create("http://ip-api.com/json/?fields=status,message,city,lat,lon"))
-                        .timeout(Duration.ofSeconds(5))
-                        .GET()
-                        .build();
-
-                try {
-                    HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-                    int httpResponseStatusCode = httpResponse.statusCode();
-
-                    if (httpResponseStatusCode >=200 && httpResponseStatusCode <300) {
-                        ObjectMapper jsonMapper = new ObjectMapper();
-                        JsonNode jsonRoot = jsonMapper.readTree(httpResponse.body());
-                        String cityName = jsonRoot.get("city").asString();
-                        String cityLongitude = jsonRoot.get("lon").asString();
-                        String cityLatitude = jsonRoot.get("lat").asString();
-
-                        return new Location(cityName, cityLongitude, cityLatitude, true);
-                    } else {
-                        throw new IOException("HTTP Error: " + httpResponseStatusCode);
-                    }
-                } catch (Exception e) {
-                    throw new IOException("Connection error", e);
-                }
+                return getLocationAPIClient.getLocation();
             }
         };
     }

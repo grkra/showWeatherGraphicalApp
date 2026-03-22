@@ -1,8 +1,10 @@
 package controller;
 
+import controller.service.GetLocationServiceFactory;
 import controller.service.GetWeatherService;
 import controller.service.GetLocationService;
 import controller.service.GetWeatherServiceFactory;
+import controller.service.client.IpApiLocationAPIClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -195,7 +197,7 @@ public class MainWindowController extends BaseController implements Initializabl
         }
 
         // initialize services
-        this.locationService = new GetLocationService();
+        this.locationService = GetLocationServiceFactory.createGetLocationService();
         this.weatherService = GetWeatherServiceFactory.createGetWeatherService();
     }
 
@@ -278,7 +280,7 @@ public class MainWindowController extends BaseController implements Initializabl
         // GetWeatherService
         this.weatherService.setOnSucceeded(
                 workerStateEvent -> {
-                    System.out.println(weatherService.getValue());
+
                     WeatherData weatherData = this.weatherService.getValue();
 
                     // Current weather section

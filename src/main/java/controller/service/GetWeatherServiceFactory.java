@@ -1,6 +1,6 @@
 package controller.service;
 
-import controller.service.client.OpenWeatherMapAPIClient;
+import controller.service.client.OpenWeatherMapWeatherAPIClient;
 
 /**
  * Factory responsible for creating GetWeatherService object.
@@ -12,6 +12,6 @@ public class GetWeatherServiceFactory {
      * @return (GetWeatherService) new weather service.
      */
     public static GetWeatherService createGetWeatherService () {
-        return new GetWeatherService(new OpenWeatherMapAPIClient());
+        return new GetWeatherService(new OpenWeatherMapWeatherAPIClient());
     }
 }

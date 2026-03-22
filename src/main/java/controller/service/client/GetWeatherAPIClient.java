@@ -14,18 +14,10 @@ import java.io.IOException;
  * - current weather (code to display icon presenting weather, weather description, temperature in Celsius, feels like temperature in Celsius,
  * wind speed in m/s, cloudiness in %, humidity in %, air pressure in hPa)
  * - weather forecast for 5 days (code to display icon presenting weather, feels like temperature in Celsius).
- *
+ * <p>
  * Additionally, API can send back location (city name, latitude, longitude). If API doesn't send location, method should provide them other way.
  */
 public interface GetWeatherAPIClient {
-
-    /**
-     * Method sets Location object. Location is necessary to send API request.
-     * First set location, then start service.
-     *
-     * @param location - (Location) city to check weather.
-     */
-//    void setLocation(Location location);
 
     /**
      * Method is used to send request to API providing weather forecast.

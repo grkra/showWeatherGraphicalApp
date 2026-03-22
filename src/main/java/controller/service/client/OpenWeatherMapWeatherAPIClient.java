@@ -19,7 +19,7 @@ import java.util.List;
  * It gets location form API to update longitude and latitude of a city based on city name
  * (if they weren't fetched from geolocation service yet).
  */
-public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
+public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
 
     /**
      * Connection object used to send HTTP request and get responses from API.
@@ -27,16 +27,22 @@ public class OpenWeatherMapAPIClient implements GetWeatherAPIClient {
     private HttpClient httpClient;
 
     /**
-     * Constructor of the GetSurrentWeather service.
+     * Constructor of the OpenWeatherMapAPIClient API connector.
      * It initializes http client object for the requests to API.
      */
-    public OpenWeatherMapAPIClient() {
+    public OpenWeatherMapWeatherAPIClient() {
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(5))
                 .build();
     }
 
 
+    /**
+     * Method responsible for sending requests for current weather and weather forecast for passed location.
+     * @param location (Location) - city for which weather is being checked.
+     * @return (WeatherData) - object containing Location, CurrentWeather and WeatherForecast.
+     * @throws IOException - in case of connection error.
+     */
     public WeatherData getWeather (Location location) throws IOException {
         HttpRequest httpRequestCurrentWeather;
         HttpRequest httpRequestWeatherForecast;
