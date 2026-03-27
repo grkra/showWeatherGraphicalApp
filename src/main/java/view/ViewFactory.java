@@ -42,6 +42,7 @@ public class ViewFactory {
         Scene scene = new Scene(parent);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css_files/default.css")).toExternalForm());
         Stage stage = new Stage();
+        stage.setTitle("Check your weather");
         stage.setScene(scene);
         stage.show();
     }
