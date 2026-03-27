@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="container" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,31 +24,27 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Current location">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="section-title" text="Current location">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" VBox.vgrow="NEVER">
                            <children>
-                              <Label maxWidth="1.7976931348623157E308" text="City: " />
-                              <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                              <Label maxWidth="1.7976931348623157E308" styleClass="label-normal" text="City: " />
+                              <StackPane alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308">
                                  <children>
-                                    <TextField fx:id="currentLocationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" HBox.hgrow="SOMETIMES" />
-                                    <Button mnemonicParsing="false" onAction="#checkCurrentLocationButtonAction" prefHeight="25.6" prefWidth="25.6" textAlignment="JUSTIFY">
-                                       <graphic>
-                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../icons/localization.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
+                                    <TextField fx:id="currentLocationField" maxWidth="1.7976931348623157E308" promptText="Warsaw" />
+                                    <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#checkCurrentLocationButtonAction" styleClass="icon-button" textAlignment="JUSTIFY">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <SVGPath content="M11 2a1 1 0 0 1 2 0v2.062A8.004 8.004 0 0 1 19.938 11H22a1 1 0 0 1 0 2h-2.062A8.004 8.004 0 0 1 13 19.938V22a1 1 0 0 1-2 0v-2.062A8.004 8.004 0 0 1 4.062 13H2a1 1 0 0 1 0-2h2.062A8.004 8.004 0 0 1 11 4.062V2zm7 10a6 6 0 1 0-12 0 6 6 0 0 0 12 0zm-3 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" scaleX="0.7" scaleY="0.7" scaleZ="0.7" />
+                                       </graphic>
                                     </Button>
                                  </children>
-                              </HBox>
+                              </StackPane>
                               <Button mnemonicParsing="false" onAction="#checkCurrentLocationWeatherButtonAction" text="Check weather">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -60,59 +58,59 @@
                               <Insets left="10.0" right="10.0" />
                            </padding>
                         </HBox>
-                        <VBox fx:id="currentLocationWeatherVbox" alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
+                        <VBox fx:id="currentLocationWeatherVbox" alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" spacing="10.0" visible="false">
                            <children>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="148.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label fx:id="currentLocationName" />
-                                    <Label layoutX="196.0" layoutY="10.0" text="lat:" />
-                                    <Label fx:id="currentLocationLatitude" />
-                                    <Label layoutX="193.0" layoutY="10.0" text="lon:" />
-                                    <Label fx:id="currentLocationLongitude" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                                    <Label fx:id="currentLocationName" styleClass="label-bold" />
+                                    <Label layoutX="196.0" layoutY="10.0" styleClass="label-normal" text="lat:" />
+                                    <Label fx:id="currentLocationLatitude" styleClass="label-normal" />
+                                    <Label layoutX="193.0" layoutY="10.0" styleClass="label-normal" text="lon:" />
+                                    <Label fx:id="currentLocationLongitude" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" />
                                  </children>
                               </HBox>
-                              <ImageView fx:id="currentLocationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="currentLocationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fx:id="currentLocationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label fx:id="currentLocationDescriptionLable" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Temperature:" />
-                                    <Label fx:id="currentLocationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="°C" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
-                                 <children>
-                                    <Label text="Feels like:" />
-                                    <Label fx:id="currentLocationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="°C" />
+                                    <Label styleClass="label-normal" text="Temperature:" />
+                                    <Label fx:id="currentLocationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="°C" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Wind speed:" />
-                                    <Label fx:id="currentLocationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="m/s" />
+                                    <Label styleClass="label-normal" text="Feels like:" />
+                                    <Label fx:id="currentLocationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="°C" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Cloudiness:" />
-                                    <Label fx:id="currentLocationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="\%" />
+                                    <Label styleClass="label-normal" text="Wind speed:" />
+                                    <Label fx:id="currentLocationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="m/s" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Humidity:" />
-                                    <Label fx:id="currentLocationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="\%" />
+                                    <Label styleClass="label-normal" text="Cloudiness:" />
+                                    <Label fx:id="currentLocationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="\%" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Pressure:" />
-                                    <Label fx:id="currentLocationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="hPa" />
+                                    <Label styleClass="label-normal" text="Humidity:" />
+                                    <Label fx:id="currentLocationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="\%" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
+                                 <children>
+                                    <Label styleClass="label-normal" text="Pressure:" />
+                                    <Label fx:id="currentLocationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="hPa" />
                                  </children>
                               </HBox>
                            </children>
@@ -121,8 +119,8 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Destination" />
-                        <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="section-title" text="Destination" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                            <children>
                               <Label text="City: " />
                               <HBox alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
@@ -140,59 +138,59 @@
                               <Insets left="10.0" right="10.0" />
                            </padding>
                         </HBox>
-                        <VBox fx:id="destinationWeatherVbox" alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
+                        <VBox fx:id="destinationWeatherVbox" alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" spacing="10.0" visible="false">
                            <children>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label fx:id="destinationName" />
-                                    <Label layoutX="196.0" layoutY="10.0" text="lat:" />
-                                    <Label fx:id="destinationLatitude" />
-                                    <Label layoutX="193.0" layoutY="10.0" text="lon:" />
-                                    <Label fx:id="destinationLongitude" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                                    <Label fx:id="destinationName" styleClass="label-bold" />
+                                    <Label layoutX="196.0" layoutY="10.0" styleClass="label-normal" text="lat:" />
+                                    <Label fx:id="destinationLatitude" styleClass="label-normal" />
+                                    <Label layoutX="193.0" layoutY="10.0" styleClass="label-normal" text="lon:" />
+                                    <Label fx:id="destinationLongitude" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" />
                                  </children>
                               </HBox>
-                              <ImageView fx:id="destinationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="destinationDescriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fx:id="destinationIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label fx:id="destinationDescriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Temperature:" />
-                                    <Label fx:id="destinationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="°C" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
-                                 <children>
-                                    <Label text="Feels like:" />
-                                    <Label fx:id="destinationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="°C" />
+                                    <Label styleClass="label-normal" text="Temperature:" />
+                                    <Label fx:id="destinationTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="°C" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Wind speed:" />
-                                    <Label fx:id="destinationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="m/s" />
+                                    <Label styleClass="label-normal" text="Feels like:" />
+                                    <Label fx:id="destinationFeelsLikeTemperatureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="°C" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Cloudiness:" />
-                                    <Label fx:id="destinationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="\%" />
+                                    <Label styleClass="label-normal" text="Wind speed:" />
+                                    <Label fx:id="destinationWindSpeedLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="m/s" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Humidity:" />
-                                    <Label fx:id="destinationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="\%" />
+                                    <Label styleClass="label-normal" text="Cloudiness:" />
+                                    <Label fx:id="destinationCloudinessLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="\%" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
                                  <children>
-                                    <Label text="Pressure:" />
-                                    <Label fx:id="destinationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" />
-                                    <Label text="hPa" />
+                                    <Label styleClass="label-normal" text="Humidity:" />
+                                    <Label fx:id="destinationHumidityLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="\%" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="3.0">
+                                 <children>
+                                    <Label styleClass="label-normal" text="Pressure:" />
+                                    <Label fx:id="destinationPressureLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
+                                    <Label styleClass="label-bold" text="hPa" />
                                  </children>
                               </HBox>
                            </children>
@@ -201,9 +199,9 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox fx:id="weatherForecastSection" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+            <VBox fx:id="weatherForecastSection" alignment="CENTER" styleClass="weather-forecast-section" visible="false">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Weather Forecast" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="section-title" text="Weather Forecast" />
                   <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
@@ -219,71 +217,71 @@
                       <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="weatherForecastLabel10" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.vgrow="SOMETIMES" />
-                        <Label fx:id="weatherForecastLabel20" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.vgrow="SOMETIMES" />
-                        <Label fx:id="weatherForecastLabel30" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.vgrow="SOMETIMES" />
-                        <Label fx:id="weatherForecastLabel40" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.vgrow="SOMETIMES" />
-                        <Label fx:id="weatherForecastLabel50" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.vgrow="SOMETIMES" />
-                        <Label fx:id="weatherForecastLabel01" alignment="CENTER" contentDisplay="CENTER" managed="flase" maxWidth="1.7976931348623157E308" visible="false" GridPane.rowIndex="1" />
-                        <Label fx:id="weatherForecastLabel02" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
+                        <Label fx:id="weatherForecastLabel10" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" GridPane.columnIndex="1" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel20" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel30" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel40" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel50" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-normal" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.vgrow="SOMETIMES" />
+                        <Label fx:id="weatherForecastLabel01" alignment="CENTER" contentDisplay="CENTER" managed="flase" maxWidth="1.7976931348623157E308" styleClass="label-bold" visible="false" GridPane.rowIndex="1" />
+                        <Label fx:id="weatherForecastLabel02" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" GridPane.rowIndex="2" />
                         <VBox fx:id="weatherForecastVbox11" alignment="CENTER" managed="flase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox21" alignment="CENTER" managed="flase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox31" alignment="CENTER" managed="flase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox12" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox22" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox41" alignment="CENTER" managed="flase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox32" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox42" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox51" alignment="CENTER" managed="flase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                         <VBox fx:id="weatherForecastVbox52" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="2">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" />
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="label-bold" />
                            </children>
                         </VBox>
                      </children>
@@ -297,6 +295,10 @@
       </VBox>
    </center>
    <bottom>
-      <Label fx:id="errorLabel" BorderPane.alignment="CENTER" />
+      <Label fx:id="errorLabel" BorderPane.alignment="CENTER">
+         <styleClass>
+            <String fx:value="label-error" />
+            <String fx:value="label-bold" />
+         </styleClass></Label>
    </bottom>
 </BorderPane>

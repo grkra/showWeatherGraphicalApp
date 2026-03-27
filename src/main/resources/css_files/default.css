@@ -1,0 +1,69 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #eef3f8;
+}
+
+.weather-forecast-section {
+    -fx-min-height: 100;
+    -fx-max-height: 100;
+}
+
+.section-title {
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+}
+
+.label-normal {
+    -fx-font-size: 10pt;
+}
+
+.label-bold {
+    -fx-font-size: 10pt;
+    -fx-font-weight: bold;
+}
+
+.label-error {
+    -fx-text-fill: #d32f2f
+}
+
+Button {
+    -fx-background-color: #4a90e2;
+    -fx-min-height: 28;
+    -fx-max-height: 28;
+    -fx-font-size: 10pt;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+Button:hover {
+    -fx-background-color: #357abd;
+}
+
+Button:pressed {
+    -fx-background-color: #2f6fa5;
+}
+
+.icon-button {
+    -fx-min-width: 28;
+    -fx-max-width: 28;
+}
+
+TextField {
+    -fx-font-size: 10pt;
+    -fx-pref-height: 28;
+    -fx-padding: 0 8 0 8;
+    -fx-background-radius: 8;
+}
+
+StackPane TextField {
+    -fx-padding: 0 35 0 8;
+}
+
+.icon-button SVGPath{
+    -fx-fill: white;
+}
+
+.weather-icon {
+    -fx-effect: dropshadow(three-pass-box, #808080, 10, 0.5, 0, 2);
+}
