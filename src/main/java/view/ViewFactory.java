@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Class creates, displays, and closes windows of the application.
@@ -39,6 +40,7 @@ public class ViewFactory {
         }
 
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css_files/default.css")).toExternalForm());
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
