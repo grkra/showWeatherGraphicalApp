@@ -1,5 +1,6 @@
 package krawczyk.grzegorz.controller;
 
+import krawczyk.grzegorz.WeatherManager;
 import krawczyk.grzegorz.controller.service.GetLocationServiceFactory;
 import krawczyk.grzegorz.controller.service.GetWeatherService;
 import krawczyk.grzegorz.controller.service.GetLocationService;
@@ -183,8 +184,8 @@ public class MainWindowController extends BaseController implements Initializabl
      * Constructor of the class MainWindowController
      * @param fxmlName (String) - name of the fxml file connected with the controller.
      */
-    public MainWindowController(String fxmlName) {
-        super(fxmlName);
+    public MainWindowController(WeatherManager weatherManager, String fxmlName) {
+        super(weatherManager, fxmlName);
         // initialize WeatherData objects
         this.currentLocationWeather = new WeatherData(new Location(true));
         this.destinationWeather = new WeatherData(new Location(false));

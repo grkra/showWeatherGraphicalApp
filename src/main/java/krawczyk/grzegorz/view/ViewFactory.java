@@ -1,5 +1,6 @@
 package krawczyk.grzegorz.view;
 
+import krawczyk.grzegorz.WeatherManager;
 import krawczyk.grzegorz.controller.BaseController;
 import krawczyk.grzegorz.controller.MainWindowController;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +16,17 @@ import java.util.Objects;
  */
 public class ViewFactory {
 
+    private WeatherManager weatherManager;
+
+    public ViewFactory(WeatherManager weatherManager) {
+        this.weatherManager = weatherManager;
+    }
+
     /**
      * Method displays main window of the application.
      */
     public void showMainWindow() {
-        BaseController controller = new MainWindowController("MainWindow");
+        BaseController controller = new MainWindowController(weatherManager, "MainWindow");
         showWindow(controller);
     }
 
