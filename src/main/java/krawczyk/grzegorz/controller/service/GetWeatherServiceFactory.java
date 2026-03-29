@@ -1,6 +1,6 @@
-package controller.service;
+package krawczyk.grzegorz.controller.service;
 
-import controller.service.client.OpenWeatherMapWeatherAPIClient;
+import krawczyk.grzegorz.controller.service.client.OpenWeatherMapWeatherAPIClient;
 
 /**
  * Factory responsible for creating GetWeatherService object.

@@ -1,6 +1,8 @@
+package krawczyk.grzegorz;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.ViewFactory;
+import krawczyk.grzegorz.view.ViewFactory;
 
 public class Launcher extends Application {
 

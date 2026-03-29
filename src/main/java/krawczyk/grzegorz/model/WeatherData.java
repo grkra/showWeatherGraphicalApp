@@ -1,4 +1,4 @@
-package model;
+package krawczyk.grzegorz.model;
 
 /**
  * Complete weather data for a location.to be displayed in current weather section.

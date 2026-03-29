@@ -1,10 +1,10 @@
-package controller.service;
+package krawczyk.grzegorz.controller.service;
 
-import controller.service.client.GetWeatherAPIClient;
+import krawczyk.grzegorz.controller.service.client.GetWeatherAPIClient;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import model.Location;
-import model.WeatherData;
+import krawczyk.grzegorz.model.Location;
+import krawczyk.grzegorz.model.WeatherData;
 
 /**
  * Controller responsible for getting weather data for the passed location.

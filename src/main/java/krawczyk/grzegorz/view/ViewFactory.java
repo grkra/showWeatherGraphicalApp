@@ -1,7 +1,7 @@
-package view;
+package krawczyk.grzegorz.view;
 
-import controller.BaseController;
-import controller.MainWindowController;
+import krawczyk.grzegorz.controller.BaseController;
+import krawczyk.grzegorz.controller.MainWindowController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

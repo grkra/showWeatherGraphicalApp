@@ -1,4 +1,4 @@
-package model;
+package krawczyk.grzegorz.model;
 
 /**
  * City - name of a city, longitude, latitude and information if it is currentLocation

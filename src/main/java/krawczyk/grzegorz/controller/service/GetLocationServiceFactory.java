@@ -1,6 +1,6 @@
-package controller.service;
+package krawczyk.grzegorz.controller.service;
 
-import controller.service.client.IpApiLocationAPIClient;
+import krawczyk.grzegorz.controller.service.client.IpApiLocationAPIClient;
 
 /**
  * Factory responsible for creating GetLocationService object.

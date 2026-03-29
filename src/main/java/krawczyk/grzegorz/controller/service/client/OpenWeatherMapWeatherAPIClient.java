@@ -1,6 +1,6 @@
-package controller.service.client;
+package krawczyk.grzegorz.controller.service.client;
 
-import model.*;
+import krawczyk.grzegorz.model.*;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 

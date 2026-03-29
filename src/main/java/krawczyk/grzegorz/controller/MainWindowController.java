@@ -1,10 +1,9 @@
-package controller;
+package krawczyk.grzegorz.controller;
 
-import controller.service.GetLocationServiceFactory;
-import controller.service.GetWeatherService;
-import controller.service.GetLocationService;
-import controller.service.GetWeatherServiceFactory;
-import controller.service.client.IpApiLocationAPIClient;
+import krawczyk.grzegorz.controller.service.GetLocationServiceFactory;
+import krawczyk.grzegorz.controller.service.GetWeatherService;
+import krawczyk.grzegorz.controller.service.GetLocationService;
+import krawczyk.grzegorz.controller.service.GetWeatherServiceFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,8 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import model.Location;
-import model.WeatherData;
+import krawczyk.grzegorz.model.Location;
+import krawczyk.grzegorz.model.WeatherData;
 
 import java.net.URL;
 import java.time.LocalDate;

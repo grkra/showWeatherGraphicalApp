@@ -1,4 +1,4 @@
-package model;
+package krawczyk.grzegorz.model;
 
 import java.time.LocalDate;
 

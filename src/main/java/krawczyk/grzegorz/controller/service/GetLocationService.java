@@ -1,9 +1,9 @@
-package controller.service;
+package krawczyk.grzegorz.controller.service;
 
-import controller.service.client.GetLocationAPIClient;
+import krawczyk.grzegorz.controller.service.client.GetLocationAPIClient;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import model.Location;
+import krawczyk.grzegorz.model.Location;
 
 /**
  * Controller responsible for getting current location.

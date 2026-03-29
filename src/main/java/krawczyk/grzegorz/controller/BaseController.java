@@ -1,4 +1,4 @@
-package controller;
+package krawczyk.grzegorz.controller;
 
 /**
  * Base class to be extended in all controllers.

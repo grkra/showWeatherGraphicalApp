@@ -1,7 +1,7 @@
-package controller.service.client;
+package krawczyk.grzegorz.controller.service.client;
 
-import model.Location;
-import model.WeatherData;
+import krawczyk.grzegorz.model.Location;
+import krawczyk.grzegorz.model.WeatherData;
 
 import java.io.IOException;
 

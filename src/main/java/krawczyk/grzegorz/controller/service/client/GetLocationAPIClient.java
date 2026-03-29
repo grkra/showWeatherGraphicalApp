@@ -1,6 +1,6 @@
-package controller.service.client;
+package krawczyk.grzegorz.controller.service.client;
 
-import model.Location;
+import krawczyk.grzegorz.model.Location;
 
 import java.io.IOException;
 
