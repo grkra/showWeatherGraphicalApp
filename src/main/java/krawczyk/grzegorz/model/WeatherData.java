@@ -1,10 +1,12 @@
 package krawczyk.grzegorz.model;
 
+import java.io.Serializable;
+
 /**
  * Complete weather data for a location.to be displayed in current weather section.
  * It contains Location object, CurrentWeather object and WeatherForecast object.
  */
-public class WeatherData {
+public class WeatherData implements Serializable {
     Location location;
     CurrentWeather currentWeather;
     WeatherForecast weatherForecast;
@@ -66,5 +68,14 @@ public class WeatherData {
      */
     public WeatherForecast getWeatherForecast() {
         return weatherForecast;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherData{" +
+                "location=" + location +
+                ", currentWeather=" + currentWeather +
+                ", weatherForecast=" + weatherForecast +
+                '}';
     }
 }

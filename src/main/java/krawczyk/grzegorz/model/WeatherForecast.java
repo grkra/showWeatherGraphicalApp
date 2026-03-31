@@ -1,12 +1,13 @@
 package krawczyk.grzegorz.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Weather data form a city to be displayed in weather forecast section.
  * Contains: city name and list of weather forecasts for each day.
  */
-public class WeatherForecast {
+public class WeatherForecast implements Serializable {
 
     private List<WeatherForecastSingleDayEntry> weatherForecastEntries;
 

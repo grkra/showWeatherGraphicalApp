@@ -2,11 +2,13 @@ package krawczyk.grzegorz;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import krawczyk.grzegorz.controller.persistence.PersistenceAccess;
 import krawczyk.grzegorz.view.ViewFactory;
 
 public class Launcher extends Application {
 
-    private WeatherManager weatherManager = new WeatherManager();
+    private WeatherManager weatherManager;
+    private PersistenceAccess persistenceAccess = new PersistenceAccess();
 
     public static void main(String[] args) {
         launch();
@@ -14,8 +16,19 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        this.weatherManager = persistenceAccess.loadFromFile();
 
+        System.out.println("WCZYTYWANIE");
+        System.out.println(this.weatherManager);
+        System.out.println(this.weatherManager == null);
+        System.out.println(this.weatherManager.getCurrentLocationWeather() == null);
+        System.out.println(this.weatherManager.getDestinationWeather() == null);
         ViewFactory viewFactory = new ViewFactory(weatherManager);
         viewFactory.showMainWindow();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        this.persistenceAccess.saveToFile(this.weatherManager);
     }
 }

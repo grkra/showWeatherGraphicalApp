@@ -2,7 +2,9 @@ package krawczyk.grzegorz;
 
 import krawczyk.grzegorz.model.WeatherData;
 
-public class WeatherManager {
+import java.io.Serializable;
+
+public class WeatherManager implements Serializable {
     private WeatherData currentLocationWeather;
     private WeatherData destinationWeather;
 
@@ -20,5 +22,10 @@ public class WeatherManager {
 
     public void setDestinationWeather(WeatherData destinationWeather) {
         this.destinationWeather = destinationWeather;
+    }
+
+    @Override
+    public String toString() {
+        return ("Current location: " + this.currentLocationWeather + ", destionation: " + this.destinationWeather);
     }
 }
