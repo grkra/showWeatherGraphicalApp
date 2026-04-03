@@ -40,10 +40,11 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
     /**
      * Method responsible for sending requests for current weather and weather forecast for passed location.
      * @param location (Location) - city for which weather is being checked.
+     * @param isCurrentLocation (boolean) - information if weather is collected for current location.
      * @return (WeatherData) - object containing Location, CurrentWeather and WeatherForecast.
      * @throws IOException - in case of connection error.
      */
-    public WeatherData getWeather (Location location) throws IOException {
+    public WeatherData getWeather (Location location, boolean isCurrentLocation) throws IOException {
         HttpRequest httpRequestCurrentWeather;
         HttpRequest httpRequestWeatherForecast;
         if (location.getLatitude().isBlank() || location.getLongitude().isBlank()) {
@@ -82,7 +83,7 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
                 location = updateLocationLongitudeLatitudeFromResponse(httpResponseCurrentWeather, location);
             }
 
-            return new WeatherData(location, currentWeather, weatherForecast);
+            return new WeatherData(isCurrentLocation, location, currentWeather, weatherForecast);
         } catch (Exception e) {
             throw new IOException("Connection error", e);
         }
@@ -174,7 +175,7 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
             JsonNode jsonRoot = jsonMapper.readTree(httpResponseCurrentWeather.body());
             String longitude = jsonRoot.get("coord").get("lon").asString();
             String latitude = jsonRoot.get("coord").get("lat").asString();
-            return new Location(location.getName(), longitude, latitude, location.getIsCurrentLocation());
+            return new Location(location.getName(), longitude, latitude);
         } else {
             throw new IOException("HTTP Error: " + httpResponseStatusCode);
         }

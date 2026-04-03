@@ -56,7 +56,7 @@ public class IpApiLocationAPIClient implements GetLocationAPIClient {
                 String cityLongitude = jsonRoot.get("lon").asString();
                 String cityLatitude = jsonRoot.get("lat").asString();
 
-                return new Location(cityName, cityLongitude, cityLatitude, true);
+                return new Location(cityName, cityLongitude, cityLatitude);
             } else {
                 throw new IOException("HTTP Error: " + httpResponseStatusCode);
             }

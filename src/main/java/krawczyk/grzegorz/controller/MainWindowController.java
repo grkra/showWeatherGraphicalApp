@@ -187,8 +187,8 @@ public class MainWindowController extends BaseController implements Initializabl
     public MainWindowController(WeatherManager weatherManager, String fxmlName) {
         super(weatherManager, fxmlName);
         // initialize WeatherData objects
-        this.currentLocationWeather = new WeatherData(new Location(true));
-        this.destinationWeather = new WeatherData(new Location(false));
+        this.currentLocationWeather = new WeatherData(new Location());
+        this.destinationWeather = new WeatherData(new Location());
 
         // initialize array of 5 days starting tomorrow (to be displayed in weather forecast section)
         this.weatherForecastDates = new LocalDate[5];
@@ -222,6 +222,7 @@ public class MainWindowController extends BaseController implements Initializabl
             updateLocationIfNecessary(this.currentLocationField, this.currentLocationWeather.getLocation());
 
             this.weatherService.setLocation(this.currentLocationWeather.getLocation());
+            this.weatherService.setIsCurrentLocation(true);
             this.weatherService.restart();
         } else {
             this.errorLabel.setText("Please fill the location first.");
@@ -237,6 +238,7 @@ public class MainWindowController extends BaseController implements Initializabl
             updateLocationIfNecessary(this.destinationField, this.destinationWeather.getLocation());
 
             this.weatherService.setLocation(this.destinationWeather.getLocation());
+            this.weatherService.setIsCurrentLocation(false);
             this.weatherService.restart();
         } else {
             this.errorLabel.setText("Please fill the location first.");
@@ -297,7 +299,7 @@ public class MainWindowController extends BaseController implements Initializabl
                 workerStateEvent -> {
                     WeatherData weatherData = this.weatherService.getValue();
 
-                    if (weatherData.getLocation().getIsCurrentLocation()) {
+                    if (weatherData.getIsCurrentLocation()) {
                         this.currentLocationWeather = weatherData;
                         this.weatherManager.setCurrentLocationWeather(this.currentLocationWeather);
 

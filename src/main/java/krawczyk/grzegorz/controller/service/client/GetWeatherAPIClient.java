@@ -32,5 +32,5 @@ public interface GetWeatherAPIClient {
      * @return new WeatherData object containing CurrentWeather, WeatherForecast, Location.
      * @throws IOException
      */
-    WeatherData getWeather(Location location) throws IOException;
+    WeatherData getWeather(Location location, boolean isCurrentLocation) throws IOException;
 }
