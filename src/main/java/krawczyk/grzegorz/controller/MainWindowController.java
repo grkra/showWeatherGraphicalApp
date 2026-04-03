@@ -182,6 +182,7 @@ public class MainWindowController extends BaseController implements Initializabl
 
     /**
      * Constructor of the class MainWindowController
+     *
      * @param fxmlName (String) - name of the fxml file connected with the controller.
      */
     public MainWindowController(WeatherManager weatherManager, String fxmlName) {
@@ -266,17 +267,17 @@ public class MainWindowController extends BaseController implements Initializabl
         }
 
         // Initializes current weather and weather forecast with data persisted before app was closed
-        if (this.weatherManager != null) {
-            if (this.weatherManager.getCurrentLocationWeather() != null) {
-                this.currentLocationWeather = this.weatherManager.getCurrentLocationWeather();
+        if (this.weatherManager.getCurrentLocationWeather().getCurrentWeather() != null
+                && this.weatherManager.getDestinationWeather() != null) {
+            this.currentLocationWeather = this.weatherManager.getCurrentLocationWeather();
 
-                displayWeatherForCurrentLocation();
-            }
-            if (this.weatherManager.getDestinationWeather() != null) {
-                this.destinationWeather = this.weatherManager.getDestinationWeather();
+            displayWeatherForCurrentLocation();
+        }
+        if (this.weatherManager.getDestinationWeather().getCurrentWeather() != null
+                && this.weatherManager.getDestinationWeather() != null) {
+            this.destinationWeather = this.weatherManager.getDestinationWeather();
 
-                displayWeatherForDestination();
-            }
+            displayWeatherForDestination();
         }
 
 
@@ -320,7 +321,7 @@ public class MainWindowController extends BaseController implements Initializabl
                 });
     }
 
-    private void displayWeatherForCurrentLocation () {
+    private void displayWeatherForCurrentLocation() {
         // Display current weather section
         this.currentLocationName.setText(this.currentLocationWeather.getLocation().getName());
         this.currentLocationLatitude.setText(this.currentLocationWeather.getLocation().getLatitude());
@@ -357,7 +358,7 @@ public class MainWindowController extends BaseController implements Initializabl
         this.weatherForecastSection.setVisible(true);
     }
 
-    private void displayWeatherForDestination () {
+    private void displayWeatherForDestination() {
         // Display current weather section
         this.destinationName.setText(this.destinationWeather.getLocation().getName());
         this.destinationLatitude.setText(this.destinationWeather.getLocation().getLatitude());
@@ -412,7 +413,7 @@ public class MainWindowController extends BaseController implements Initializabl
      * @param textField (TextField) - text field used to fill city name in current location or destination section.
      * @return fale - if text field is blank or empty, true otherwise
      */
-    private boolean validateField (TextField textField) {
+    private boolean validateField(TextField textField) {
         if (textField.getText().isBlank()) {
             return false;
         }
@@ -432,9 +433,9 @@ public class MainWindowController extends BaseController implements Initializabl
      * </ul>
      *
      * @param textField (TextField) - text field used to fill city name in current location or destination section.
-     * @param location (Location) currentLocation or destinationLocation
+     * @param location  (Location) currentLocation or destinationLocation
      */
-    private void updateLocationIfNecessary (TextField textField, Location location) {
+    private void updateLocationIfNecessary(TextField textField, Location location) {
         if (!textField.getText().equalsIgnoreCase(location.getName())) {
             location.setName(textField.getText());
             location.setLongitude("");

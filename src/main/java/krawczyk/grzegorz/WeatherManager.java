@@ -8,6 +8,11 @@ public class WeatherManager implements Serializable {
     private WeatherData currentLocationWeather;
     private WeatherData destinationWeather;
 
+    public WeatherManager(WeatherData currentLocationWeather, WeatherData destinationWeather) {
+        this.currentLocationWeather = currentLocationWeather;
+        this.destinationWeather = destinationWeather;
+    }
+
     public WeatherData getCurrentLocationWeather() {
         return currentLocationWeather;
     }

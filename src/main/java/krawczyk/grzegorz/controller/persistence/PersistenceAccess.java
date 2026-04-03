@@ -1,6 +1,7 @@
 package krawczyk.grzegorz.controller.persistence;
 
 import krawczyk.grzegorz.WeatherManager;
+import krawczyk.grzegorz.model.Location;
 import krawczyk.grzegorz.model.WeatherData;
 
 import java.io.*;
@@ -14,7 +15,7 @@ public class PersistenceAccess {
 
     public WeatherManager loadFromFile() {
 
-        WeatherManager weatherManager = new WeatherManager();
+        WeatherManager weatherManager = new WeatherManager(new WeatherData(new Location()), new WeatherData(new Location()));
 
         try {
             FileInputStream fileInputStream = new FileInputStream(this.VALID_ACCOUNTS_LOCATION);
