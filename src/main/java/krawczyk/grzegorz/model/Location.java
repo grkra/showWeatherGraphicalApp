@@ -30,10 +30,18 @@ public class Location implements Serializable {
         this.latitude = latitude;
     }
 
+    /**
+     * Returns city name.
+     * @return (String) city name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets city name. Method changes firs letter of every word in city name to capital letter.
+     * @param name (String) city name.
+     */
     public void setName(String name) {
         StringBuilder stringBuilder = new StringBuilder(name.length());
         boolean isNewWord = true;
@@ -53,18 +61,34 @@ public class Location implements Serializable {
         this.name = stringBuilder.toString();
     }
 
+    /**
+     * Returns longitude.
+     * @return (String) longitude
+     */
     public String getLongitude() {
         return longitude;
     }
 
+    /**
+     * Sets longitude.
+     * @param longitude (String) longitude
+     */
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
+    /**
+     * Returns latitude.
+     * @return (String) latitude
+     */
     public String getLatitude() {
         return latitude;
     }
 
+    /**
+     * Sets latitude.
+     * @param latitude (String) latitude
+     */
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }

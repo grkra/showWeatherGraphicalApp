@@ -17,7 +17,7 @@ public class WeatherData implements Serializable {
      * It initializes location object in the class. Rest of objects is not initialized - they are null.
      * It is used to initialize location.
      * @param location (Location) - location for which weather will be checked.
-     *                 You can pass new Location object with no parameters..
+     *                 You can pass new Location object with no parameters.
      */
     public WeatherData(Location location) {
         this.location = location;
@@ -51,35 +51,35 @@ public class WeatherData implements Serializable {
     }
 
     /**
-     * Returns true if it is weather for current location, false if it is for destination
-     * @return
+     * Checks if it is weather for current location or destination.
+     * @return (boolean) true for current location, false for destination.
      */
     public boolean getIsCurrentLocation() {
         return isCurrentLocation;
     }
 
     /**
-     * Returns Location object
+     * Returns Location object.
      *
-     * @return
+     * @return (Location) location (city) for which this weather data was checked.
      */
     public Location getLocation() {
         return location;
     }
 
     /**
-     * Returns CurrentWeather object
+     * Returns CurrentWeather object.
      *
-     * @return
+     * @return (CurrentData) weather data for current time.
      */
     public CurrentWeather getCurrentWeather() {
         return currentWeather;
     }
 
     /**
-     * Returns WeatherForecast object
+     * Returns WeatherForecast object.
      *
-     * @return
+     * @return (WeatherForecast) weather forecast data for 5 days.
      */
     public WeatherForecast getWeatherForecast() {
         return weatherForecast;

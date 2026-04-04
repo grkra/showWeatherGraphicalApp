@@ -29,6 +29,8 @@ public interface GetWeatherAPIClient {
      * <p>
      * Additionally, API can send back location (city name, latitude, longitude). If API doesn't send location, method should provide them other way.
      *
+     * @param location (Location) - city to check weather (it can by just city name or longitude and latitude)
+     * @param isCurrentLocation - true if weather is checked for current location, fale elsewhere.
      * @return new WeatherData object containing CurrentWeather, WeatherForecast, Location.
      * @throws IOException
      */

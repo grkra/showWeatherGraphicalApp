@@ -6,6 +6,9 @@ import krawczyk.grzegorz.model.WeatherData;
 
 import java.io.*;
 
+/**
+ * Class is responsible for saving WeatherManager to and loading from file
+ */
 public class PersistenceAccess {
 
     /**
@@ -13,6 +16,15 @@ public class PersistenceAccess {
      */
     private String VALID_ACCOUNTS_LOCATION = System.getProperty("user.home") + File.separator + "weatherData.ser";
 
+    /**
+     * Method reads data from persisted file and saves it to WeatherManager obejct.
+     * @return WeatherManager object.
+     * <ul>
+     *     <li>If there was persisted file - it returns WeatherManager object with data from file</li>
+     *     <li>If there was NO file - it returns new WeatherManager object with initialized Location property only</li>
+     * </ul>
+     *
+     */
     public WeatherManager loadFromFile() {
 
         WeatherManager weatherManager = new WeatherManager(new WeatherData(new Location()), new WeatherData(new Location()));
@@ -28,6 +40,10 @@ public class PersistenceAccess {
         return weatherManager;
     }
 
+    /**
+     * Method saves WeatherManager object to local file.
+     * @param weatherDataToPersist (WeatherManager) - object containing weather data for current location and destination.
+     */
     public void saveToFile(WeatherManager weatherDataToPersist) {
 
         try {
