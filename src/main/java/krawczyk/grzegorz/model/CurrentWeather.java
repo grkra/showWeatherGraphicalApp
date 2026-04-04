@@ -1,10 +1,12 @@
 package krawczyk.grzegorz.model;
 
+import java.io.Serializable;
+
 /**
  * Weather data to be displayed in current weather section.
  * Contains: code to display icon, description, temperature, feels like temperature, wind speed, cloudiness, humidity, pressure.
  */
-public class CurrentWeather {
+public class CurrentWeather implements Serializable {
     private String iconCode;
     private String description;
     private String temperature;

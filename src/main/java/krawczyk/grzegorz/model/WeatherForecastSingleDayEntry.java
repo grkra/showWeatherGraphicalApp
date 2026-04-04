@@ -1,12 +1,13 @@
 package krawczyk.grzegorz.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Simple weather data forecast for 1 day to be displayed in weather forecast section.
  * Contains: date, code to display icon, temperature.
  */
-public class WeatherForecastSingleDayEntry {
+public class WeatherForecastSingleDayEntry implements Serializable {
     private LocalDate localDate;
     private String iconCode;
     private String feelsLikeTemperature;

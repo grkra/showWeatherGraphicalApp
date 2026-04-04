@@ -15,6 +15,7 @@ public class GetWeatherService extends Service<WeatherData> {
 
     private final GetWeatherAPIClient getWeatherAPIClient;
     private Location location;
+    private boolean isCurrentLocation;
 
     /**
      * Constructor of the class GetWeatherService.
@@ -31,7 +32,7 @@ public class GetWeatherService extends Service<WeatherData> {
             @Override
             protected WeatherData call() throws Exception {
 
-                return getWeatherAPIClient.getWeather(location);
+                return getWeatherAPIClient.getWeather(location, isCurrentLocation);
             }
         };
     }
@@ -44,5 +45,14 @@ public class GetWeatherService extends Service<WeatherData> {
      */
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    /**
+     * Method sets isCurrentLocation in GetWeatherService object.
+     * Then it is used to create returned WeatherData object.
+     * @param currentLocation - (boolean) true if it is current location, false otherwise.
+     */
+    public void setIsCurrentLocation(boolean currentLocation) {
+        isCurrentLocation = currentLocation;
     }
 }
