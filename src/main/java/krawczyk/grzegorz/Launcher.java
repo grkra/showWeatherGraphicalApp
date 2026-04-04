@@ -17,19 +17,12 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.weatherManager = persistenceAccess.loadFromFile();
-
-        System.out.println("--------------------------------------------------");
-        System.out.println("WCZYTYWANIE:");
-        System.out.println(this.weatherManager);
         ViewFactory viewFactory = new ViewFactory(weatherManager);
         viewFactory.showMainWindow();
     }
 
     @Override
     public void stop() throws Exception {
-        System.out.println("---------------------------------------------------");
-        System.out.println("ZAPISYWANIE");
-        System.out.println(this.weatherManager);
         this.persistenceAccess.saveToFile(this.weatherManager);
     }
 }
