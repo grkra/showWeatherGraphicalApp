@@ -30,8 +30,6 @@ public class PersistenceAccess {
 
     public void saveToFile(WeatherManager weatherDataToPersist) {
 
-        System.out.println("ZAPISYWANIE");
-        System.out.println(weatherDataToPersist);
         try {
             File file = new File(this.VALID_ACCOUNTS_LOCATION);
             FileOutputStream fileOutputStream = new FileOutputStream(file);

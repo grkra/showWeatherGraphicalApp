@@ -188,8 +188,8 @@ public class MainWindowController extends BaseController implements Initializabl
     public MainWindowController(WeatherManager weatherManager, String fxmlName) {
         super(weatherManager, fxmlName);
         // initialize WeatherData objects
-        this.currentLocationWeather = new WeatherData(new Location());
-        this.destinationWeather = new WeatherData(new Location());
+        this.currentLocationWeather = this.weatherManager.getCurrentLocationWeather();
+        this.destinationWeather = this.weatherManager.getDestinationWeather();
 
         // initialize array of 5 days starting tomorrow (to be displayed in weather forecast section)
         this.weatherForecastDates = new LocalDate[5];
@@ -267,16 +267,12 @@ public class MainWindowController extends BaseController implements Initializabl
         }
 
         // Initializes current weather and weather forecast with data persisted before app was closed
-        if (this.weatherManager.getCurrentLocationWeather().getCurrentWeather() != null
-                && this.weatherManager.getDestinationWeather() != null) {
-            this.currentLocationWeather = this.weatherManager.getCurrentLocationWeather();
-
+        if (this.currentLocationWeather.getCurrentWeather() != null
+                && this.currentLocationWeather.getWeatherForecast() != null) {
             displayWeatherForCurrentLocation();
         }
-        if (this.weatherManager.getDestinationWeather().getCurrentWeather() != null
-                && this.weatherManager.getDestinationWeather() != null) {
-            this.destinationWeather = this.weatherManager.getDestinationWeather();
-
+        if (this.destinationWeather.getCurrentWeather() != null
+                && this.destinationWeather.getWeatherForecast() != null) {
             displayWeatherForDestination();
         }
 
@@ -301,13 +297,20 @@ public class MainWindowController extends BaseController implements Initializabl
                     WeatherData weatherData = this.weatherService.getValue();
 
                     if (weatherData.getIsCurrentLocation()) {
-                        this.currentLocationWeather = weatherData;
-                        this.weatherManager.setCurrentLocationWeather(this.currentLocationWeather);
+                        this.currentLocationWeather.setLocation(weatherData.getLocation());
+                        this.currentLocationWeather.setCurrentWeather(weatherData.getCurrentWeather());
+                        this.currentLocationWeather.setWeatherForecast(weatherData.getWeatherForecast());
+                        System.out.println("-------------------------------------------");
+                        System.out.println("DANE W CURRENT LOCATION:");
+                        System.out.println(this.currentLocationWeather);
+                        System.out.println("DANE W WEATHER MANAGER:");
+                        System.out.println(this.weatherManager.getCurrentLocationWeather());
 
                         displayWeatherForCurrentLocation();
                     } else {
-                        this.destinationWeather = weatherData;
-                        this.weatherManager.setDestinationWeather(this.destinationWeather);
+                        this.destinationWeather.setLocation(weatherData.getLocation());
+                        this.destinationWeather.setCurrentWeather(weatherData.getCurrentWeather());
+                        this.destinationWeather.setWeatherForecast(weatherData.getWeatherForecast());
 
                         displayWeatherForDestination();
                     }
