@@ -16,7 +16,7 @@ public class WeatherManager implements Serializable {
      * Constructor is used to initialize Location properties of both: currentLocationWeather and destinationWeather.
      * You can pass new WeatherData objects with new empty Location() objects.
      * @param currentLocationWeather (WeatherData) - weather data for current location.
-     * @param destinationWeather (WeatherData) - weather data for destionation.
+     * @param destinationWeather (WeatherData) - weather data for destination.
      */
     public WeatherManager(WeatherData currentLocationWeather, WeatherData destinationWeather) {
         this.currentLocationWeather = currentLocationWeather;
@@ -53,10 +53,5 @@ public class WeatherManager implements Serializable {
      */
     public void setDestinationWeather(WeatherData destinationWeather) {
         this.destinationWeather = destinationWeather;
-    }
-
-    @Override
-    public String toString() {
-        return ("Current location: " + this.currentLocationWeather + ", destionation: " + this.destinationWeather);
     }
 }

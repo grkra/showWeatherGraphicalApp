@@ -14,22 +14,34 @@ public class WeatherData implements Serializable {
 
     /**
      * Constructor of the class WeatherData.
-     * It initializes location object in the class. Rest of objects is not initialized - they are null.
-     * It is used to initialize location.
+     * It initializes location object in the class and isCurrentLocation property.
+     * Rest of objects is not initialized - they are null.
+     * It is used to initialize:
+     * <ol>
+     *     <li>
+     *         location property (it is necessary in getWeather button actions in case if there was no persisted file to load),
+     *     </li>
+     *     <li>
+     *         isCurrentLocation (it is used to pass data to getWeather API in getWeather button actions).
+     *     </li>
+     * </ol>
+     *
      * @param location (Location) - location for which weather will be checked.
      *                 You can pass new Location object with no parameters.
+     * @param isCurrentLocation (boolean) - true for current location data, false for destination data/
      */
-    public WeatherData(Location location) {
+    public WeatherData(Location location, boolean isCurrentLocation) {
         this.location = location;
+        this.isCurrentLocation = isCurrentLocation;
     }
 
     /**
      * Constructor of the class WeatherData.
      *
      * @param isCurrentLocation - if it is weather for current location or destination
-     * @param location        - object of class Location
-     * @param currentWeather  - object of class CurrentWeather
-     * @param weatherForecast - object of class WeatherForecast
+     * @param location          - object of class Location
+     * @param currentWeather    - object of class CurrentWeather
+     * @param weatherForecast   - object of class WeatherForecast
      */
     public WeatherData(boolean isCurrentLocation, Location location, CurrentWeather currentWeather, WeatherForecast weatherForecast) {
         this.isCurrentLocation = isCurrentLocation;
@@ -42,16 +54,9 @@ public class WeatherData implements Serializable {
         this.location = location;
     }
 
-    public void setCurrentWeather(CurrentWeather currentWeather) {
-        this.currentWeather = currentWeather;
-    }
-
-    public void setWeatherForecast(WeatherForecast weatherForecast) {
-        this.weatherForecast = weatherForecast;
-    }
-
     /**
      * Checks if it is weather for current location or destination.
+     *
      * @return (boolean) true for current location, false for destination.
      */
     public boolean getIsCurrentLocation() {
@@ -83,14 +88,5 @@ public class WeatherData implements Serializable {
      */
     public WeatherForecast getWeatherForecast() {
         return weatherForecast;
-    }
-
-    @Override
-    public String toString() {
-        return "WeatherData{" +
-                "location=" + location +
-                ", currentWeather=" + currentWeather +
-                ", weatherForecast=" + weatherForecast +
-                '}';
     }
 }

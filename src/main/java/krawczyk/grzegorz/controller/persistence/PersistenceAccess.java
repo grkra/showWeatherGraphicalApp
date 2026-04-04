@@ -27,12 +27,14 @@ public class PersistenceAccess {
      */
     public WeatherManager loadFromFile() {
 
-        WeatherManager weatherManager = new WeatherManager(new WeatherData(new Location()), new WeatherData(new Location()));
+        WeatherManager weatherManager = new WeatherManager(new WeatherData(new Location(), true), new WeatherData(new Location(), false));
 
         try {
             FileInputStream fileInputStream = new FileInputStream(this.VALID_ACCOUNTS_LOCATION);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             weatherManager = (WeatherManager) objectInputStream.readObject();
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found. No data to load.");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -218,7 +218,7 @@ public class MainWindowController extends BaseController implements Initializabl
             updateLocationIfNecessary(this.currentLocationField, this.weatherManager.getCurrentLocationWeather().getLocation());
 
             this.weatherService.setLocation(this.weatherManager.getCurrentLocationWeather().getLocation());
-            this.weatherService.setIsCurrentLocation(true);
+            this.weatherService.setIsCurrentLocation(this.weatherManager.getCurrentLocationWeather().getIsCurrentLocation());
             this.weatherService.restart();
         } else {
             this.errorLabel.setText("Please fill the location first.");
@@ -234,7 +234,7 @@ public class MainWindowController extends BaseController implements Initializabl
             updateLocationIfNecessary(this.destinationField, this.weatherManager.getDestinationWeather().getLocation());
 
             this.weatherService.setLocation(this.weatherManager.getDestinationWeather().getLocation());
-            this.weatherService.setIsCurrentLocation(false);
+            this.weatherService.setIsCurrentLocation(this.weatherManager.getDestinationWeather().getIsCurrentLocation());
             this.weatherService.restart();
         } else {
             this.errorLabel.setText("Please fill the location first.");
