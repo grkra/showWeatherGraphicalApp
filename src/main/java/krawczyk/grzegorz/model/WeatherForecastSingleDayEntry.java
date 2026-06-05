@@ -2,6 +2,7 @@ package krawczyk.grzegorz.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Simple weather data forecast for 1 day to be displayed in weather forecast section.
@@ -46,5 +47,17 @@ public class WeatherForecastSingleDayEntry implements Serializable {
      */
     public String getFeelsLikeTemperature() {
         return feelsLikeTemperature;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        WeatherForecastSingleDayEntry that = (WeatherForecastSingleDayEntry) o;
+        return Objects.equals(localDate, that.localDate) && Objects.equals(iconCode, that.iconCode) && Objects.equals(feelsLikeTemperature, that.feelsLikeTemperature);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(localDate, iconCode, feelsLikeTemperature);
     }
 }

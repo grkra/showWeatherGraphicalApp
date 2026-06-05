@@ -70,4 +70,16 @@ class IpApiLocationAPIClientTest {
         assertThrows(IOException.class, () -> ipApiLocationAPIClient.getLocation());
     }
 
+    @Test
+    void getLocationShouldThrowExceptionInCaseOfResponseBodyNull() throws IOException, InterruptedException {
+        // given
+        when(httpResponse.statusCode()).thenReturn(200);
+        when(httpResponse.body()).thenReturn(null);
+        when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(httpResponse);
+
+        // when
+        // then
+        assertThrows(IOException.class, () -> ipApiLocationAPIClient.getLocation());
+    }
+
 }
