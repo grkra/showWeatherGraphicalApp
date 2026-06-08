@@ -1,6 +1,7 @@
 package krawczyk.grzegorz.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Weather data to be displayed in current weather section.
@@ -57,5 +58,17 @@ public class CurrentWeather implements Serializable {
 
     public String getPressure() {
         return pressure;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        CurrentWeather that = (CurrentWeather) o;
+        return Objects.equals(iconCode, that.iconCode) && Objects.equals(description, that.description) && Objects.equals(temperature, that.temperature) && Objects.equals(feelsLikeTemperature, that.feelsLikeTemperature) && Objects.equals(windSpeed, that.windSpeed) && Objects.equals(cloudiness, that.cloudiness) && Objects.equals(humidity, that.humidity) && Objects.equals(pressure, that.pressure);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(iconCode, description, temperature, feelsLikeTemperature, windSpeed, cloudiness, humidity, pressure);
     }
 }

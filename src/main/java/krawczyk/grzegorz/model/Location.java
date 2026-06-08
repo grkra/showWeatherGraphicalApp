@@ -1,6 +1,7 @@
 package krawczyk.grzegorz.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * City - name of a city, longitude, latitude and information if it is currentLocation
@@ -94,11 +95,14 @@ public class Location implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Location{" +
-                "name='" + name + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", latitude='" + latitude + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return Objects.equals(name, location.name) && Objects.equals(longitude, location.longitude) && Objects.equals(latitude, location.latitude);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, longitude, latitude);
     }
 }
