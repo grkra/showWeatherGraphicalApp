@@ -65,8 +65,6 @@ class OpenWeatherMapWeatherAPIClientTest {
                 }
         );
 
-        System.out.println(httpResponseWeatherForecast.body());
-
         // when
         WeatherData weatherData = openWeatherMapWeatherAPIClient.getWeather(location, isCurrentLocation);
 
