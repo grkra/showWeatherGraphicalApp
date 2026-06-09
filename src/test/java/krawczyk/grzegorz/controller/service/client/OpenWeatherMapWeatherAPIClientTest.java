@@ -3,8 +3,7 @@ package krawczyk.grzegorz.controller.service.client;
 import krawczyk.grzegorz.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,6 +32,7 @@ class OpenWeatherMapWeatherAPIClientTest {
     private HttpResponse<String> httpResponseWeatherForecast;
 
     @InjectMocks
+    @Spy
     private OpenWeatherMapWeatherAPIClient openWeatherMapWeatherAPIClient;
 
     private final String currentWeatherHttpResponseBodyForTests = """
@@ -65,6 +64,8 @@ class OpenWeatherMapWeatherAPIClientTest {
                     throw new IllegalArgumentException();
                 }
         );
+
+        System.out.println(httpResponseWeatherForecast.body());
 
         // when
         WeatherData weatherData = openWeatherMapWeatherAPIClient.getWeather(location, isCurrentLocation);
@@ -189,6 +190,7 @@ class OpenWeatherMapWeatherAPIClientTest {
                     throw new IllegalArgumentException();
                 }
         );
+        when(openWeatherMapWeatherAPIClient.getCurrentDate()).thenReturn(LocalDate.of(2026,6, 5));
 
         CurrentWeather expectedCurrentWeatherResult = new CurrentWeather("10d",
                 "Heavy intensity rain",

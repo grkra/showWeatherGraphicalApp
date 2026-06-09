@@ -142,7 +142,8 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
                 ZonedDateTime zonedDateTime = instantDateTime.atZone(ZoneId.systemDefault());
                 LocalDate localDate = zonedDateTime.toLocalDate();
 
-                if (localDate.isAfter(LocalDate.now())
+                LocalDate currentDate = getCurrentDate();
+                if (localDate.isAfter(currentDate)
                         &&
                         zonedDateTime.getHour() >= 11 && zonedDateTime.getHour() <= 13) {
 
@@ -179,5 +180,14 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
         } else {
             throw new IOException("HTTP Error: " + httpResponseStatusCode);
         }
+    }
+
+    /**
+     * Method returns current system local date.
+     * It is necessary for testing purposes - to return fixed date if necessary.
+     * @return LocalDate object.
+     */
+    protected LocalDate getCurrentDate () {
+        return LocalDate.now();
     }
 }
