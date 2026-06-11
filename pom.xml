@@ -77,6 +77,7 @@
 
     <build>
         <finalName>CurrentWeather</finalName>
+        <!--JavaFX plugin used to starting App during development-->
         <plugins>
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -86,26 +87,29 @@
                     <mainClass>krawczyk.grzegorz.Launcher</mainClass>
                 </configuration>
             </plugin>
+
+            <!--Shade plugin used to build FAT JAR file-->
             <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.6.2</version>
-                    <configuration>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>krawczyk.grzegorz.Main</mainClass>
-                            </transformer>
-                        </transformers>
-                        <createDependencyReducedPom>false</createDependencyReducedPom>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.2</version>
+                <configuration>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>krawczyk.grzegorz.Main</mainClass>
+                        </transformer>
+                    </transformers>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
