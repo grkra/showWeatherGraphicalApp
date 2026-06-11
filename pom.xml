@@ -77,6 +77,8 @@
 
     <build>
         <finalName>CurrentWeather</finalName>
+
+        <!--JavaFX plugin used to starting App during development-->
         <plugins>
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -86,26 +88,41 @@
                     <mainClass>krawczyk.grzegorz.Launcher</mainClass>
                 </configuration>
             </plugin>
+
+            <!--Dependency plugin copies all dependencies to target/libs directory-->
             <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.6.2</version>
-                    <configuration>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>krawczyk.grzegorz.Main</mainClass>
-                            </transformer>
-                        </transformers>
-                        <createDependencyReducedPom>false</createDependencyReducedPom>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.11.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--Jar plugin creates JAR without dependencies but with Class-Path in MANIFEST.MF-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>krawczyk.grzegorz.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
