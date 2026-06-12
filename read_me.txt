@@ -28,26 +28,28 @@ Installation
 Portable JAR file
 ----------------------------------------------------
 You can build portable JAR file and use application this way.
-1. Build package
+1. Go to pom.xml file and uncomment right part <plugins> part
+2. Build package
 	mvn package
-2. Maven will build 2 JAR files and place them in ././target directory:
+3. Maven will build 2 JAR files and place them in ./target directory:
 	- currentWeather.jar			- fat jar containing code with all necessary dependencies
 	- original-currentWeather.jar	- it contains compiled code only, without dependencies
-3. Navigate to JAR file directory (by default: project-direcotry/target/) and open terminal there
-4. Start the application (fat jar version)
+4. Navigate to JAR file directory (by default: project-direcotry/target/) and open terminal there
+5. Start the application (fat jar version)
 	java -jar currentWeather.jar
-5. You can move or copy the JAR file wherever you want
-5. WARNING: You need JDK 21 installed and to start and use JAR file
+6. You can move or copy the JAR file wherever you want
+7. WARNING: You need JDK 21 installed and to start and use JAR file
 
 ----------------------------------------------------
 Portable EXE file
 ----------------------------------------------------
-1. Build package
-	mvn package
-2. Maven will build:
+1. Go to pom.xml file and uncomment right part <plugins> part
+2. Build package
+	mvn clean package
+3. Maven will build:
 	- JAR file (without dependencies, but with Class-Path in MANIFEST.MF) in ./target directory
 	- ./target/libs direcotry with all needed dependencies inside
-3. Go to main directory (where pom.xml file is) and run command. You can do it with Windows CMD or PowerShell.
+4. Go to main directory (where pom.xml file is) and run command. You can do it with Windows CMD or PowerShell.
 ^ marks continuation of line in Windows CMD. If you use PowerShell replace ^ with `.
 	jpackage ^
 		--type app-image ^
@@ -61,21 +63,51 @@ Portable EXE file
 		
 Or you can paste it in 1 line without ^ nor `
 	jpackage --type app-image --input target --main-jar CurrentWeather.jar --main-class krawczyk.grzegorz.Main --name CurrentWeather --java-options "--enable-preview" --dest output --icon target\classes\icon.ico
-4. New directory will appear: ./output/CurrentWeather with CurrentWeather.exe file and additional app and runtime directories containing necassary JVM and dependencies.
-5. You can doubleclick on exe file to start application.
-6. You can zip whole direcotry and move or copy it wherever you want.
+5. New directory will appear: ./output/CurrentWeather with CurrentWeather.exe file and additional app and runtime directories containing necassary JVM and dependencies.
+6. You can doubleclick on exe file to start application.
+7. You can zip whole direcotry and move or copy it wherever you want.
+
+----------------------------------------------------
+EXE installer file for Windows
+----------------------------------------------------
+1. Go to pom.xml file and uncomment right part <plugins> part
+2. Build package
+	mvn clean package
+3. Maven will build:
+	- JAR file (without dependencies, but with Class-Path in MANIFEST.MF) in ./target directory
+	- ./target/libs direcotry with all needed dependencies inside
+4. Go to main directory (where pom.xml file is) and run command. You can do it with Windows CMD or PowerShell.
+^ marks continuation of line in Windows CMD. If you use PowerShell replace ^ with `.
+	jpackage ^
+		--type exe ^
+		--input target ^
+		--main-jar CurrentWeather.jar ^
+		--main-class krawczyk.grzegorz.Main ^
+		--name CurrentWeather ^
+		--java-options "--enable-preview" ^
+		--dest output ^
+		--icon target\classes\icon.ico ^
+		--win-shortcut ^
+		--win-menu
+		
+Or you can paste it in 1 line without ^ nor `.
+	jpackage --type exe --input target --main-jar CurrentWeather.jar --main-class krawczyk.grzegorz.Main --name CurrentWeather --java-options "--enable-preview" --dest output --icon target\classes\icon.ico --win-shortcut --win-menu
+Two last lines add shortcuts on Desktop (first one) and Start Menu (second one).
+5. File will appear: ./output/CurrentWeather/CurrentWeather-version.msi.
+6. You can doubleclick on msi file to start installer. It will automatically intall application to Program Files and add shortcuts to Desktop and Start Menu.
+7. You can move or copy msi file wherever you want.
 
 ----------------------------------------------------
 MSI installer file for Windows
 ----------------------------------------------------
-WARNING: To do this you need to install WiX Toolset (3.x) on your machine.
-	Download it from https://github.com/wixtoolset/wix3/releases and install
-1. Build package
-	mvn package
-2. Maven will build:
+1. Install WiX Toolset (3.x) on your machine (https://github.com/wixtoolset/wix3/releases)
+2. Go to pom.xml file and uncomment right part <plugins> part
+3. Build package
+	mvn clean package
+4. Maven will build:
 	- JAR file (without dependencies, but with Class-Path in MANIFEST.MF) in ./target directory
 	- ./target/libs direcotry with all needed dependencies inside
-3. Go to main directory (where pom.xml file is) and run command. You can do it with Windows CMD or PowerShell.
+5. Go to main directory (where pom.xml file is) and run command. You can do it with Windows CMD or PowerShell.
 ^ marks continuation of line in Windows CMD. If you use PowerShell replace ^ with `.
 	jpackage ^
 		--type msi ^
@@ -90,8 +122,8 @@ WARNING: To do this you need to install WiX Toolset (3.x) on your machine.
 		--win-menu
 		
 Or you can paste it in 1 line without ^ nor `.
-Two last lines add shortcuts on Desktop (first one) and Start Menu (second one).
 	jpackage --type msi --input target --main-jar CurrentWeather.jar --main-class krawczyk.grzegorz.Main --name CurrentWeather --java-options "--enable-preview" --dest output --icon target\classes\icon.ico --win-shortcut --win-menu
-4. File will appear: ./output/CurrentWeather/CurrentWeather-version.msi.
-5. You can doubleclick on msi file to start installer. It will automatically intall application to Program Files and add shortcuts to Desktop and Start Menu.
-6. You can move or copy msi file wherever you want.
+Two last lines add shortcuts on Desktop (first one) and Start Menu (second one).
+6. File will appear: ./output/CurrentWeather/CurrentWeather-version.msi.
+7. You can doubleclick on msi file to start installer. It will automatically intall application to Program Files and add shortcuts to Desktop and Start Menu.
+8. You can move or copy msi file wherever you want.
