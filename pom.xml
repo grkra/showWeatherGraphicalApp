@@ -77,6 +77,10 @@
 
     <build>
         <finalName>CurrentWeather</finalName>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ExeFileBranch
         <!--JavaFX plugin used to starting App during development-->
         <plugins>
             <plugin>
@@ -88,6 +92,7 @@
                 </configuration>
             </plugin>
 
+            <!--UNCOMMENT IF YOU WANT TO CREATE FAT JAR FILE-->
             <!--Shade plugin used to build FAT JAR file-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -111,6 +116,46 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--END-->
+
+            <!--UNCOMMENT IF YOU WANT TO CREATE PORTABLE EXE FILE OR INSTALLER-->
+            <!--Dependency plugin copies all dependencies to target/libs directory-->
+            <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.11.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--Jar plugin creates JAR without dependencies but with Class-Path in MANIFEST.MF-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>krawczyk.grzegorz.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin> -->
+            <!--END-->
+            
         </plugins>
     </build>
 

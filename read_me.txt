@@ -30,7 +30,7 @@ Portable JAR file
 You can build portable JAR file and use application this way.
 1. Build package
 	mvn package
-2. Maven will build 2 JAR files and place them in target directory:
+2. Maven will build 2 JAR files and place them in ./target directory:
 	- currentWeather.jar			- fat jar containing code with all necessary dependencies
 	- original-currentWeather.jar	- it contains compiled code only, without dependencies
 3. Navigate to JAR file directory (by default: project-direcotry/target/) and open terminal there
@@ -38,3 +38,29 @@ You can build portable JAR file and use application this way.
 	java -jar currentWeather.jar
 5. You can move or copy the JAR file wherever you want
 5. WARNING: You need JDK 21 installed and to start and use JAR file
+
+----------------------------------------------------
+Portable EXE file
+----------------------------------------------------
+1. Build package
+	mvn package
+2. Maven will build:
+	- JAR file (without dependencies, but with Class-Path in MANIFEST.MF) in ./target directory
+	- ./target/libs direcotry with all needed dependencies inside
+3. Go to main directory (where pom.xml file is) and run command. You can do it with Windows CMD or PowerShell.
+^ marks continuation of line in Windows CMD. If you use PowerShell replace ^ with `.
+	jpackage ^
+		--type app-image ^
+		--input target ^
+		--main-jar CurrentWeather.jar ^
+		--main-class krawczyk.grzegorz.Main ^
+		--name CurrentWeather ^
+		--java-options "--enable-preview" ^
+		--dest output ^
+		--icon target\classes\icon.ico
+		
+Or you can paste it in 1 line without ^ nor `
+	jpackage --type app-image --input target --main-jar CurrentWeather.jar --main-class krawczyk.grzegorz.Main --name CurrentWeather --java-options "--enable-preview" --dest output --icon target\classes\icon.ico
+4. New directory will appear: ./output/CurrentWeather with CurrentWeather.exe file and additional app and runtime directories containing necassary JVM and dependencies.
+5. You can doubleclick on exe file to start application.
+6. You can zip whole direcotry and move or copy it wherever you want.
