@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>462</x>
+      <y>0</y>
+      <w>91</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>JavaFX.Application
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>231</x>
+      <y>0</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>Launcher
+-
+- weatherManager: WeatherManager
+- persistenceAccess: PersistenceAccess
+-
+_+ main(args: String[]): void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>413</x>
+      <y>28</y>
+      <w>91</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;40.0;110.0;40.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>14</x>
+      <y>0</y>
+      <w>126</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>Main
+-
+
+-
+_+ main(args: String[]): void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>133</x>
+      <y>28</y>
+      <w>112</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>14</x>
+      <y>119</y>
+      <w>273</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>PerisstenceAccess
+-
+- VALID_ACCOUNTS_LOCATION: String
+-
++ loadFromFile(): WeatherManager
++ saveToFile(weatherDataToPersist: WeatherManager): void
+bg=gray
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>14</x>
+      <y>259</y>
+      <w>420</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>WeatherManager
+-
+- currentLocationWeather: WeatherData
+- destinationWeather: WeatherData
+-
++ WeatherManager(currentLocationWeather: WeatherData, destinationWeather: WeatherData)
++ getters
++ setters</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>147</x>
+      <y>56</y>
+      <w>189</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;50.0;250.0;50.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>56</y>
+      <w>126</w>
+      <h>217</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;240.0;160.0;240.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>343</x>
+      <y>119</y>
+      <w>238</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>ViewFactory
+-
+- weatherManager: WeatherManager
+-
++ ViewFactory(weatherManager: WeatherManager)
++ showMainWindow(): void
+- showWindow(controller: BaseController): void
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>189</y>
+      <w>21</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>490</x>
+      <y>385</y>
+      <w>350</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>MainWindowController
+-
+- FXML controls [@FXML]
+- weatherForecastGridElements: Node[][]
+- weatherForecastDates: LocalDate[]
+- locationService: GetLocationService
+- weatherService: GetWeatherService
+-
++ MainWindowController(weatherManager: WeatherManager, fxmlFile: String)
+~ checkCurrentLocationButtonAction(): void [@FXML]
+~ checkCurrentLocationWeatherButtonAction(): void [@FXML]
+~ checkDestinationWeatherButtonAction(): void [@FXML]
+~ checkCurrentLocationWeatherButtonAction(): void [@FXML]
+~ checkCurrentLocationWeatherButtonAction(): void [@FXML]
+- displayWeatherForCurrentLocation(): void
+- displayWeatherForDestination(): void
+- setDayAlias(weatherForecastDate: LocalDate): String
+- validateField(textField: TextField): boolean
+- updateLocationIfNecessary(textField: TextField, location: Location): void
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>490</x>
+      <y>259</y>
+      <w>350</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>BaseController
+-
+- weatherManager: weatherManager
+- fxmlFile: String
+-
++ BaseController(weatherManager: WeatherManager, fxmlFile: String)
++ getFxmlName(): String
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>658</x>
+      <y>322</y>
+      <w>21</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>889</x>
+      <y>287</y>
+      <w>98</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Javafx.Initializable
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>707</x>
+      <y>322</y>
+      <w>238</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;50.0;320.0;50.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>896</x>
+      <y>546</y>
+      <w>231</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>GetLocationServiceFactory
+-
+
+-
+_+ createGetWeatherService(): GetWeatherService_
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>896</x>
+      <y>448</y>
+      <w>231</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>GetLocationServiceFactory
+-
+
+-
++ createGetLocationService(): GetLocationService
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1183</x>
+      <y>546</y>
+      <w>308</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>GetLocationService
+-
+- getLocationAPIClient: GetLocationAPIClient
+-
++ GetLocationService(getLocationAPIClient: GetLocationAPIClient)
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1183</x>
+      <y>448</y>
+      <w>308</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>GetLocationService
+-
+- getLocationAPIClient: GetLocationAPIClient
+-
++ GetLocationService(getLocationAPIClient: GetLocationAPIClient)
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1470</x>
+      <y>357</y>
+      <w>98</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Javafx.Service
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1407</x>
+      <y>392</y>
+      <w>126</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;40.0;160.0;40.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1407</x>
+      <y>392</y>
+      <w>126</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;190.0;160.0;190.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1281</x>
+      <y>630</y>
+      <w>119</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+GetLocationAPIClient
+-
+getLocation(): Location
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>588</y>
+      <w>21</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>833</x>
+      <y>518</y>
+      <w>518</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;720.0;10.0;720.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>833</x>
+      <y>560</y>
+      <w>77</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>833</x>
+      <y>469</y>
+      <w>77</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>833</x>
+      <y>413</y>
+      <w>518</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;720.0;10.0;720.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1274</x>
+      <y>714</y>
+      <w>133</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>IpApiLocationAPIClient
+-
+- httpClient: HttpClient
+-
++ IpApiLocationAPIClient()
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>672</y>
+      <w>21</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1463</x>
+      <y>630</y>
+      <w>210</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+GetWeatherAPIClient
+-
+getWeather(location: Location, 
+      isCurrentLocation: boolean): WeatherData
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1085</x>
+      <y>812</y>
+      <w>595</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>OpenWeatherMapWeatherAPIClient
+-
+- httpClient: HttpClient
+-
++ OpenWeatherMapWeatherAPIClient()
++ getLocation(): Location
+- getCurrentWeatherFromResponse(httpResponseCurrentWeather: HttpResponse&lt;String&gt;): CurrentWeather
+- getWeatherForecastFromResponse(httpResponseWeatherForecast: HttpResponse&lt;String&gt;): WeatherForecast
+- updateLocationLongitudeLatitudeFromResponse(httpResponseCurrentWeather: HttpResponse&lt;String&gt;, location: Location): Location 
+# getCurrentDate(): LocalDate
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1561</x>
+      <y>686</y>
+      <w>21</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1484</x>
+      <y>469</y>
+      <w>91</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>147</x>
+      <y>490</y>
+      <w>287</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>WeatherData
+-
+- isCurrentLocation: boolean
+- location: Location
+- currentWeather: CurrentWeather
+- weatherForecast: WeatherForecast
+-
++ WeatherData(location: Location, isCurrentLocation: boolean)
++ getters
++ setters
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>287</x>
+      <y>588</y>
+      <w>21</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>56</x>
+      <y>651</y>
+      <w>378</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>WeatherForecast
+-
+- weatherForecastEntries: List&lt;WeatherForecastSingleDayEntry&gt;
+-
++ WeatherForecast(weatherForecastEntries: List&lt;WeatherForecastSingleDayEntry&gt;)
++ getter
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>490</x>
+      <y>651</y>
+      <w>266</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>CurrentWeather
+-
+- iconCode: String
+- description: String
+- temperature: String
+- feelsLikeTemperature: String
+- windSpeed: String
+- cloudiness: String
+- humidity: String
+- pressure: String
+-
++ CurrentWeather(iconCode: String, description: String, 
+      temperature: String, feelsLikeTemperature: String, 
+      windSpeed: String, cloudiness: String, humidity: String, 
+      pressure: String)
++ getters
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>147</x>
+      <y>175</y>
+      <w>21</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>336</y>
+      <w>21</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>287</x>
+      <y>588</y>
+      <w>350</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>480.0;90.0;480.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>805</x>
+      <y>651</y>
+      <w>266</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>Location
+-
+- name: String
+- longitude: String
+- latitude: String
+-
++ Location()
++ Location(name: String, longitude: String, latitude: String)
++ getters
++ setters
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>287</x>
+      <y>588</y>
+      <w>665</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>930.0;90.0;930.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>56</x>
+      <y>749</y>
+      <w>378</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>WeatherForecastSingleDayEntry
+-
+- localDate: LocalDate
+- iconCode: String
+- feelsLikeTemperature: String
+-
++ WeatherForecastSingleDayEntry(localDate: LocalDate, iconCode: String, feelsLikeTemperature: String)
++ getters
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>238</x>
+      <y>707</y>
+      <w>21</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>315</x>
+      <y>56</y>
+      <w>161</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>210.0;90.0;210.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>189</y>
+      <w>21</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>427</x>
+      <y>273</y>
+      <w>77</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>294</x>
+      <y>455</y>
+      <w>385</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>530.0;200.0;530.0;220.0;240.0;220.0;240.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>658</x>
+      <y>588</y>
+      <w>231</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;310.0;30.0;310.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>560</y>
+      <w>77</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>469</y>
+      <w>77</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>938</x>
+      <y>749</y>
+      <w>413</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;570.0;50.0;570.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>938</x>
+      <y>749</y>
+      <w>441</w>
+      <h>203</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;270.0;610.0;270.0;610.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>609</x>
+      <y>826</y>
+      <w>777</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;1090.0;170.0;1090.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>238</x>
+      <y>826</y>
+      <w>1155</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0;1630.0;180.0;1630.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>35</x>
+      <y>707</y>
+      <w>1365</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>260.0;10.0;260.0;40.0;10.0;40.0;10.0;360.0;1930.0;360.0;1930.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>28</x>
+      <y>588</y>
+      <w>1379</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>270.0;10.0;270.0;50.0;10.0;50.0;10.0;540.0;1950.0;540.0;1950.0;470.0</additional_attributes>
+  </element>
+</diagram>
