@@ -16,7 +16,7 @@ public class PersistenceAccess {
     /**
      * Path to store date
      */
-    private String VALID_ACCOUNTS_LOCATION = System.getProperty("user.home") + File.separator + "weatherData.ser";
+    private static final String WEATHER_DATA_FILE_PATH  = System.getProperty("user.home") + File.separator + "weatherData.ser";
     private static final Logger logger = Logger.getLogger(PersistenceAccess.class.getName());
 
     /**
@@ -32,7 +32,7 @@ public class PersistenceAccess {
 
         WeatherManager weatherManager = new WeatherManager(new WeatherData(new Location(), true), new WeatherData(new Location(), false));
 
-        try (FileInputStream fileInputStream = new FileInputStream(this.VALID_ACCOUNTS_LOCATION)) {
+        try (FileInputStream fileInputStream = new FileInputStream(this.WEATHER_DATA_FILE_PATH )) {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             weatherManager = (WeatherManager) objectInputStream.readObject();
         } catch (FileNotFoundException e) {
@@ -51,7 +51,7 @@ public class PersistenceAccess {
      */
     public void saveToFile(WeatherManager weatherDataToPersist) {
 
-        File file = new File(this.VALID_ACCOUNTS_LOCATION);
+        File file = new File(this.WEATHER_DATA_FILE_PATH );
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
 
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
