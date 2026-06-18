@@ -1,5 +1,6 @@
 package krawczyk.grzegorz.controller.service.client;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import krawczyk.grzegorz.model.*;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
@@ -26,6 +27,8 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
      */
     private HttpClient httpClient;
 
+    private static final String OPENWEATHER_API_KEY = Dotenv.load().get("OPENWEATHER_API_KEY");
+
     /**
      * Constructor of the OpenWeatherMapAPIClient API connector.
      * It initializes http client object for the requests to API.
@@ -45,28 +48,29 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
      * @throws IOException - in case of connection error.
      */
     public WeatherData getWeather (Location location, boolean isCurrentLocation) throws IOException {
+        System.getenv();
         HttpRequest httpRequestCurrentWeather;
         HttpRequest httpRequestWeatherForecast;
         if (location.getLatitude().isBlank() || location.getLongitude().isBlank()) {
             String locationNameNoSpaces = location.getName().replace(" ", "%20");
             httpRequestCurrentWeather = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?q=" + locationNameNoSpaces + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                    .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?q=" + locationNameNoSpaces + "&appid="+OPENWEATHER_API_KEY+"&units=metric"))
                     .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();
             httpRequestWeatherForecast = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?q=" + locationNameNoSpaces + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                    .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?q=" + locationNameNoSpaces + "&appid="+OPENWEATHER_API_KEY+"&units=metric"))
                     .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();
         } else {
             httpRequestCurrentWeather = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                    .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&appid="+OPENWEATHER_API_KEY+"&units=metric"))
                     .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();
             httpRequestWeatherForecast = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&appid=6699194108befabbceba16db27cb548c&units=metric"))
+                    .uri(URI.create("https://api.openweathermap.org/data/2.5/forecast?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&appid="+OPENWEATHER_API_KEY+"&units=metric"))
                     .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();

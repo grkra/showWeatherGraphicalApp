@@ -18,10 +18,13 @@ Installation
 ----------------------------------------------------
 1. Clone the repository:
 	git clone https://github.com/grkra/showWeatherGraphicalApp.git
-2. Navigate to project directory
-3. Build the project
+2. You must register on https://home.openweathermap.org/ and generate API KEY there to be able to use the application
+3. Navigate to project directory
+4. Create .env file in projects direcotry (the same directory as pom.xml file)
+5. In created .env file add OPENWEATHER_API_KEY={your api key}
+6. Build the project
 	mvn clean install
-4. Run application
+7. Run application
 	mvn clean javafx:run
 
 ----------------------------------------------------
@@ -30,7 +33,7 @@ Portable JAR file
 You can build portable JAR file and use application this way.
 1. Go to pom.xml file and uncomment right part <plugins> part
 2. Build package
-	mvn package
+	mvn clean package
 3. Maven will build 2 JAR files and place them in ./target directory:
 	- currentWeather.jar			- fat jar containing code with all necessary dependencies
 	- original-currentWeather.jar	- it contains compiled code only, without dependencies
