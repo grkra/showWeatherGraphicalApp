@@ -43,6 +43,8 @@ public class ViewFactory {
         try {
             parent = fxmlLoader.load();
         } catch (IOException e) {
+            System.err.println("Failed to load FXML file: " + controller.getFxmlName());
+            e.printStackTrace();
             return;
         }
 
