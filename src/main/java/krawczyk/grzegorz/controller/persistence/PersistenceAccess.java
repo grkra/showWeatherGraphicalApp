@@ -18,19 +18,18 @@ public class PersistenceAccess {
 
     /**
      * Method reads data from persisted file and saves it to WeatherManager obejct.
+     *
      * @return WeatherManager object.
      * <ul>
      *     <li>If there was persisted file - it returns WeatherManager object with data from file</li>
      *     <li>If there was NO file - it returns new WeatherManager object with initialized Location property only</li>
      * </ul>
-     *
      */
     public WeatherManager loadFromFile() {
 
         WeatherManager weatherManager = new WeatherManager(new WeatherData(new Location(), true), new WeatherData(new Location(), false));
 
-        try {
-            FileInputStream fileInputStream = new FileInputStream(this.VALID_ACCOUNTS_LOCATION);
+        try (FileInputStream fileInputStream = new FileInputStream(this.VALID_ACCOUNTS_LOCATION)) {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             weatherManager = (WeatherManager) objectInputStream.readObject();
         } catch (FileNotFoundException e) {
@@ -38,24 +37,23 @@ public class PersistenceAccess {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return weatherManager;
     }
 
     /**
      * Method saves WeatherManager object to local file.
+     *
      * @param weatherDataToPersist (WeatherManager) - object containing weather data for current location and destination.
      */
     public void saveToFile(WeatherManager weatherDataToPersist) {
 
-        try {
-            File file = new File(this.VALID_ACCOUNTS_LOCATION);
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
+        File file = new File(this.VALID_ACCOUNTS_LOCATION);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(weatherDataToPersist);
 
             objectOutputStream.close();
-            fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
