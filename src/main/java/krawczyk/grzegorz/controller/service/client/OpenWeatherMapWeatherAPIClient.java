@@ -13,6 +13,8 @@ import java.net.http.HttpResponse;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controller responsible for getting weather data for the passed location from OpenWeatherMapAPI.
@@ -26,8 +28,8 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
      * Connection object used to send HTTP request and get responses from API.
      */
     private HttpClient httpClient;
-
     private static final String OPENWEATHER_API_KEY = Dotenv.load().get("OPENWEATHER_API_KEY");
+    private static final Logger logger = Logger.getLogger(OpenWeatherMapWeatherAPIClient.class.getName());
 
     /**
      * Constructor of the OpenWeatherMapAPIClient API connector.
@@ -89,7 +91,8 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
 
             return new WeatherData(isCurrentLocation, location, currentWeather, weatherForecast);
         } catch (Exception e) {
-            throw new IOException("Connection error", e);
+            logger.log(Level.SEVERE, "Failed to get weather data from API.", e);
+            throw new IOException("Failed to get weather data from API: ", e);
         }
     }
 
@@ -120,7 +123,7 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
 
             return new CurrentWeather(iconCode, description, temperature, feelsLikeTemperature, windSpeed, cloudiness, humidity, pressure);
         } else {
-            throw new IOException("HTTP Error: " + httpResponseStatusCode);
+            throw new IOException("HTTP error when getting current weather from API: " + httpResponseStatusCode);
         }
     }
 
@@ -160,7 +163,7 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
 
             return new WeatherForecast(weatherEntriesForEachDay);
         } else {
-            throw new IOException("HTTP Error: " + httpResponseStatusCode);
+            throw new IOException("HTTP error when getting weather forecast from API: " + httpResponseStatusCode);
         }
     }
 
@@ -182,7 +185,7 @@ public class OpenWeatherMapWeatherAPIClient implements GetWeatherAPIClient {
             String latitude = jsonRoot.get("coord").get("lat").asString();
             return new Location(location.getName(), longitude, latitude);
         } else {
-            throw new IOException("HTTP Error: " + httpResponseStatusCode);
+            throw new IOException("HTTP error when getting current weather from API: " + httpResponseStatusCode);
         }
     }
 

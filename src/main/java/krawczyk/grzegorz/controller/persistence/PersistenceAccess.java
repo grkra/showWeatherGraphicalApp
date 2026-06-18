@@ -5,6 +5,8 @@ import krawczyk.grzegorz.model.Location;
 import krawczyk.grzegorz.model.WeatherData;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class is responsible for saving WeatherManager to and loading from file
@@ -15,6 +17,7 @@ public class PersistenceAccess {
      * Path to store date
      */
     private String VALID_ACCOUNTS_LOCATION = System.getProperty("user.home") + File.separator + "weatherData.ser";
+    private static final Logger logger = Logger.getLogger(PersistenceAccess.class.getName());
 
     /**
      * Method reads data from persisted file and saves it to WeatherManager obejct.
@@ -34,8 +37,9 @@ public class PersistenceAccess {
             weatherManager = (WeatherManager) objectInputStream.readObject();
         } catch (FileNotFoundException e) {
             System.err.println("File not found. No data to load.");
+            logger.log(Level.SEVERE, "File not found. Failed to load weather data from file.", e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to load weather data from file.", e);
         }
         return weatherManager;
     }
@@ -55,7 +59,7 @@ public class PersistenceAccess {
 
             objectOutputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to save weather data to file.", e);
         }
     }
 }

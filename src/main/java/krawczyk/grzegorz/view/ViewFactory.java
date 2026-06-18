@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class creates, displays, and closes windows of the application.
@@ -17,6 +19,7 @@ import java.util.Objects;
 public class ViewFactory {
 
     private WeatherManager weatherManager;
+    private static final Logger logger = Logger.getLogger(ViewFactory.class.getName());
 
     public ViewFactory(WeatherManager weatherManager) {
         this.weatherManager = weatherManager;
@@ -44,7 +47,7 @@ public class ViewFactory {
             parent = fxmlLoader.load();
         } catch (IOException e) {
             System.err.println("Failed to load FXML file: " + controller.getFxmlName());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to load FXML file.", e);
             return;
         }
 

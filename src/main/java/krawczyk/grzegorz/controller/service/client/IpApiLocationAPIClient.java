@@ -10,6 +10,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controller responsible for getting geographical location data from ip-api.
@@ -21,6 +23,7 @@ public class IpApiLocationAPIClient implements GetLocationAPIClient {
      * Connection object used to send HTTP request and get responses from API.
      */
     private HttpClient httpClient;
+    private static final Logger logger = Logger.getLogger(IpApiLocationAPIClient.class.getName());
 
     /**
      * Constructor of the IpApiLocationAPIClient API connector.
@@ -58,10 +61,11 @@ public class IpApiLocationAPIClient implements GetLocationAPIClient {
 
                 return new Location(cityName, cityLongitude, cityLatitude);
             } else {
-                throw new IOException("HTTP Error: " + httpResponseStatusCode);
+                throw new IOException("HTTP error when getting current location from API: " + httpResponseStatusCode);
             }
         } catch (Exception e) {
-            throw new IOException("Connection error", e);
+            logger.log(Level.SEVERE, "Failed to get location from API.", e);
+            throw new IOException("Failed to get location from API", e);
         }
     }
 }
