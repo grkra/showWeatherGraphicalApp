@@ -40,6 +40,7 @@ You can build portable JAR file and use application this way.
 4. Navigate to JAR file directory (by default: project-direcotry/target/) and open terminal there
 5. Start the application (fat jar version)
 	java -jar currentWeather.jar
+WARNING: You must copy .env file to the same direcotry where jar file is OR start the application from direcotory where .env file is (like java -jar ./target/currentWeather.jar). 
 6. You can move or copy the JAR file wherever you want
 7. WARNING: You need JDK 21 installed and to start and use JAR file
 
@@ -68,6 +69,7 @@ Or you can paste it in 1 line without ^ nor `
 	jpackage --type app-image --input target --main-jar CurrentWeather.jar --main-class krawczyk.grzegorz.Main --name CurrentWeather --java-options "--enable-preview" --dest output --icon target\classes\icon.ico
 5. New directory will appear: ./output/CurrentWeather with CurrentWeather.exe file and additional app and runtime directories containing necassary JVM and dependencies.
 6. You can doubleclick on exe file to start application.
+WARNING: You must copy .env file to the same direcotry where exe file is.
 7. You can zip whole direcotry and move or copy it wherever you want.
 
 ----------------------------------------------------
@@ -99,6 +101,7 @@ Two last lines add shortcuts on Desktop (first one) and Start Menu (second one).
 5. File will appear: ./output/CurrentWeather/CurrentWeather-version.msi.
 6. You can doubleclick on msi file to start installer. It will automatically intall application to Program Files and add shortcuts to Desktop and Start Menu.
 7. You can move or copy msi file wherever you want.
+8. WARNING: You must manually copy .env file to the same direcotry where installed application is.
 
 ----------------------------------------------------
 MSI installer file for Windows
@@ -130,3 +133,4 @@ Two last lines add shortcuts on Desktop (first one) and Start Menu (second one).
 6. File will appear: ./output/CurrentWeather/CurrentWeather-version.msi.
 7. You can doubleclick on msi file to start installer. It will automatically intall application to Program Files and add shortcuts to Desktop and Start Menu.
 8. You can move or copy msi file wherever you want.
+9. WARNING: You must manually copy .env file to the same direcotry where installed application is.
